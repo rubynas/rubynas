@@ -48,6 +48,7 @@ gem 'angular-rails'
 
 # Service management
 gem 'foreman'
+gem 'puma'
 
 # Middleware API
 gem 'grape'
