@@ -70,3 +70,49 @@ The applications first dependency is the ldap server for login and authenticatio
 Use the domain name `rubynas.com` and the organisation name `RubyNAS`.
 
 The password in the `config/ldap.yml` needs to be changed accordingly.
+
+## Install an Nginx in front of RubyNAS
+
+Install the server:
+
+	sudo apt-get -y nginx
+
+Configure the server:
+
+	sudo vi /etc/nginx/sites-available/rubynas
+
+rubynas file content:
+
+	upstream rubynas {
+		server 127.0.0.1:5000;
+		server 127.0.0.1:5001;
+	}
+	
+	server {
+		listen 80;
+	
+		location ~ ^/(assets)/  {
+			root /opt/rubynas/public;
+			add_header Cache-Control public;
+			gzip_static on; # to serve pre-gzipped version
+			expires 1y;
+		}
+	
+		location / {
+			proxy_set_header  X-Real-IP $remote_addr;
+			proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_set_header  Host $http_host;
+			proxy_redirect    off;
+			proxy_pass        http://rubynas;
+		}
+	}
+
+Activate the configuration and disable the default:
+
+	sudo ln -nfs /etc/nginx/sites-available/rubynas /etc/nginx/sites-enabled/rubynas
+	sudo rm /etc/nginx/sites-enabled/default
+
+Restart the server:
+
+	sudo /etc/init.d/nginx restart
+
