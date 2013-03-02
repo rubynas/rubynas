@@ -28,6 +28,7 @@ group :test, :development do
   gem 'brakeman'
   gem 'capybara'
   gem 'capybara-webkit'
+  gem 'capistrano'
 end
 
 group :test do
