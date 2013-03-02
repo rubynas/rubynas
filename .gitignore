@@ -14,5 +14,9 @@
 /log/*.log
 /tmp
 
+# Sandbox
+sandbox/ldap/data/slapd.*
+
 .DS_Store
 .vagrant
+
