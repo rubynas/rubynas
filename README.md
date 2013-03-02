@@ -65,26 +65,8 @@ Install the package (the following steps need to be done in the box):
 The applications first dependency is the ldap server for login and authentication:
 
 	sudo apt-get -y install slapd ldap-utils
+	sudo dpkg-reconfigure slapd
 
-The application configuration can be found in the `config/ldap.yml` file.
+Use the domain name `rubynas.com` and the organisation name `RubyNAS`.
 
-To generate a secure password one can use: `slappasswd`
-
-Create a config file `/etc/ldap/slapd.conf` like this one:
-
-	access to *
-		by self write
-		by * read
-    by anonymous auth
-		
-	suffix          "dc=rubynas,dc=com"
-	directory       "/var/lib/ldap"
-	rootdn          "cn=admin,dc=rubynas,dc=com"
-	# rootpw = secret
-	rootpw          {SSHA}fFjKcZb4cfOAcwSjJer8nCGOEVRUnwCC>
-
-Restart the server afterwards
-
-	sudo /etc/init.d/slapd restart
-
-You can prefill the ldap with the file `sandbox/ldap/base.ldif`
+The password in the `config/ldap.yml` needs to be changed accordingly.
