@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="rubynas">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
@@ -19,11 +19,32 @@
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
   </head>
   <body>
-    <%= yield %>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#"><%= t('title') %></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <br>
+      <br>
+      <br>
+      <%= bootstrap_flash %>
+      <%= yield %>
+
+      <footer>
+        <p>&copy; <%= t('copyright') %></p>
+      </footer>
+
+    </div> <!-- /container -->
 
     <!-- Javascripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
+
   </body>
 </html>

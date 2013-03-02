@@ -1,5 +1,32 @@
 # RubyNAS
 
+## Getting started
+
+To start developing simply start foreman:
+
+	foreman start
+
+And go to your webbrowser at: 
+
+	http://127.0.0.1:5100/
+
+Login with one of the users in the ldap:
+
+	email: admin@rubynas.com or user@rubynas.com
+	password: secret
+
+## Run the tests
+
+Since the tests depend on the LDAP you have to start it first with:
+
+	foreman start
+
+Then use either:
+
+	rake spec
+	rake
+	rspec spec
+
 ## Directories
 
 This project has a typical rails layout plus:
@@ -30,3 +57,34 @@ Install the package (the following steps need to be done in the box):
 	cd debs
 	sudo dpkg -i rubynas*.deb
 	sudo restart rubynas
+
+# Dependency installation
+
+## Install OpenLDAP (TODO/WIP)
+
+The applications first dependency is the ldap server for login and authentication:
+
+	sudo apt-get -y install slapd ldap-utils
+
+The application configuration can be found in the `config/ldap.yml` file.
+
+To generate a secure password one can use: `slappasswd`
+
+Create a config file `/etc/ldap/slapd.conf` like this one:
+
+	access to *
+		by self write
+		by * read
+    by anonymous auth
+		
+	suffix          "dc=rubynas,dc=com"
+	directory       "/var/lib/ldap"
+	rootdn          "cn=admin,dc=rubynas,dc=com"
+	# rootpw = secret
+	rootpw          {SSHA}fFjKcZb4cfOAcwSjJer8nCGOEVRUnwCC>
+
+Restart the server afterwards
+
+	sudo /etc/init.d/slapd restart
+
+You can prefill the ldap with the file `sandbox/ldap/base.ldif`
