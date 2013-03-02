@@ -1,0 +1,16 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 aaaacf2c
+dn: cn=users
+objectClass: authorizations
+objectClass: groupOfUniqueNames
+objectClass: top
+uniqueMember: cn=user@rubynas.com,ou=users,dc=rubynas,dc=com
+authorizationRole: cn=admin@rubynas.com,ou=users,dc=rubynas,dc=com
+cn: users
+structuralObjectClass: groupOfUniqueNames
+entryUUID: 76350e6c-473f-40ea-8476-c0a1f64585fe
+creatorsName: cn=admin,dc=rubynas,dc=com
+createTimestamp: 20130302174143Z
+entryCSN: 20130302174143.762147Z#000000#000#000000
+modifiersName: cn=admin,dc=rubynas,dc=com
+modifyTimestamp: 20130302174143Z

@@ -1,0 +1,14 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 a8b827f4
+dn: dc=rubynas
+objectClass: dcObject
+objectClass: organizationalUnit
+dc: rubynas
+ou: RubyNAS
+structuralObjectClass: organizationalUnit
+entryUUID: 8b7e538c-e33b-43b9-a7f9-09e167ddc29c
+creatorsName: cn=admin,dc=rubynas,dc=com
+createTimestamp: 20130302174143Z
+entryCSN: 20130302174143.742365Z#000000#000#000000
+modifiersName: cn=admin,dc=rubynas,dc=com
+modifyTimestamp: 20130302174143Z
