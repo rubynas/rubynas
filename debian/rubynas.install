@@ -1,0 +1,15 @@
+app           				opt/rubynas
+config        				opt/rubynas
+db/migrate    				opt/rubynas/db
+db/*.rb       				opt/rubynas/db
+lib           				opt/rubynas
+public        				opt/rubynas
+vendor        				opt/rubynas
+config.ru     				opt/rubynas
+Gemfile       				opt/rubynas
+Gemfile.lock  				opt/rubynas
+Rakefile      				opt/rubynas
+.bundle/*     				opt/rubynas/.bundle
+deploy        				opt/rubynas
+deploy/rubynas.logrotate 	etc/logrotate.d
+deploy/rubynas				etc/default

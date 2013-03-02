@@ -38,6 +38,9 @@ Rubynas::Application.configure do
 
   # Use a different logger for distributed setups
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
+  ljack_device = Lumberjack::SyslogDevice.new(
+    :facility => (Syslog::LOG_LOCAL0 | Syslog::LOG_CONS))
+  config.logger = Lumberjack::Logger.new(ljack_device, :progname => "rubynas")
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
