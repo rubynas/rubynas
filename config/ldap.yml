@@ -33,4 +33,10 @@ test:
   <<: *AUTHORIZATIONS
 
 production:
-  <<: *AUTHORIZATIONS
+  host: 127.0.0.1
+  port: 389
+  attribute: cn
+  ssl: false
+  base: ou=users,dc=rubynas,dc=com
+  admin_user: cn=admin,dc=rubynas,dc=com
+  admin_password: secret
