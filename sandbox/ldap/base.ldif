@@ -18,34 +18,28 @@ ou: Groups
 # user@rubynas.com, users, rubynas.com
 dn: cn=user@rubynas.com,ou=users,dc=rubynas,dc=com
 objectClass: inetOrgPerson
-objectClass: authorizations
 sn: User
 uid: example_user
 mail: user@rubynas.com
 cn: user@rubynas.com
-authorizationRole: blogUser
 userPassword:: e1NIQX01ZW42RzZNZXpScm9UM1hLcWtkUE9tWS9CZlE9
 
 # admin@rubynas.com, users, rubynas.com
 dn: cn=admin@rubynas.com,ou=users,dc=rubynas,dc=com
 objectClass: inetOrgPerson
-objectClass: authorizations
 objectClass: organizationalPerson
 objectClass: person
 objectClass: top
 sn: Admin
 uid: example_admin
 cn: admin@rubynas.com
-authorizationRole: blogAdmin
 userPassword:: e1NIQX01ZW42RzZNZXpScm9UM1hLcWtkUE9tWS9CZlE9
 
 # users, groups, rubynas.com
 dn: cn=users,ou=groups,dc=rubynas,dc=com
-objectClass: authorizations
 objectClass: groupOfUniqueNames
 objectClass: top
 uniqueMember: cn=user@rubynas.com,ou=users,dc=rubynas,dc=com
-authorizationRole: cn=admin@rubynas.com,ou=users,dc=rubynas,dc=com
 cn: users
 
 # users, groups, rubynas.com
