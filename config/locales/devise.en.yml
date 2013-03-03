@@ -57,3 +57,19 @@ en:
       not_saved:
         one: "1 error prohibited this %{resource} from being saved:"
         other: "%{count} errors prohibited this %{resource} from being saved:"
+  devise:
+    sessions:
+      new:
+        title: Sign in
+        button:
+          submit: Sign in
+    passwords:
+      new:
+        title: Forgot your password?
+        button:
+          submit: Send instructions
+  helpers:
+    label:
+      user:
+        email: "E-Mail"
+        remember_me: "Remember the login on this computer"
