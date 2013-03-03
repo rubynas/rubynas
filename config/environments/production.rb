@@ -13,6 +13,12 @@ Rubynas::Application.configure do
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
+  
+  # Since AngularJS makes dependecy injection based on variable names omit
+  # mangling them while compression.
+  if defined?(Uglifier) # just while compiling
+    config.assets.js_compressor = Uglifier.new(:mangle => false)
+  end
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
