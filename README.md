@@ -44,19 +44,9 @@ The vagrant box is setup so that one can test the current application state on t
 
 ## Debian Package
 
-Install all build dependencies:
+Create the package and install it:
 
-	cap deploy:install
-
-Create the package:
-
-	cap deploy:debian
-
-Install the package (the following steps need to be done in the box):
-
-	cd debs
-	sudo dpkg -i rubynas*.deb
-	sudo restart rubynas
+	cap deploy:restart
 
 # Dependency installation
 
