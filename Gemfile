@@ -58,6 +58,8 @@ gem 'grape'
 gem 'lumberjack'
 gem 'lumberjack_syslog_device'
 
+gem 'rb-fsevent', '~> 0.9'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
