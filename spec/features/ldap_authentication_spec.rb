@@ -5,7 +5,7 @@ describe 'LDAP Authentication', :js => true do
     before do
       visit '/'
       page.should have_content('Sign in')
-      fill_in 'Email', :with => "user@rubynas.com"
+      fill_in 'E-Mail', :with => "user@rubynas.com"
       fill_in 'Password', :with => "secret"
       click_on 'Sign in'
     end
