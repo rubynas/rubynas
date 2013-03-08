@@ -37,72 +37,18 @@ This project has a typical rails layout plus:
 
 ## Development & Vagrant
 
-The vagrant box is setup so that one can test the current application state on the box. To get startet create the box and deploy the application:
+The vagrant box is setup so that one can test the current application state on the box. To get startet create the box and deploy the application with its services:
 
-	vagrant up
-	cap deploy:setup
+    vagrant up
 
-## Debian Package
+Install build dependencies:
 
-Create the package and install it:
+    cap deploy:setup
 
-	cap deploy:restart
+Install and configure LDAP:
 
-# Dependency installation
+    cap deploy:services
 
-## Install OpenLDAP (TODO/WIP)
+Build and install the service:
 
-The applications first dependency is the ldap server for login and authentication:
-
-	sudo apt-get -y install slapd ldap-utils
-	sudo dpkg-reconfigure slapd
-
-Use the domain name `rubynas.com` and the organisation name `RubyNAS`.
-
-The password in the `config/ldap.yml` needs to be changed accordingly.
-
-## Install an Nginx in front of RubyNAS
-
-Install the server:
-
-	sudo apt-get -y nginx
-
-Configure the server:
-
-	sudo vi /etc/nginx/sites-available/rubynas
-
-rubynas file content:
-
-	upstream rubynas {
-		server 127.0.0.1:5000;
-		server 127.0.0.1:5001;
-	}
-	
-	server {
-		listen 80;
-	
-		location ~ ^/(assets)/  {
-			root /opt/rubynas/public;
-			add_header Cache-Control public;
-			gzip_static on; # to serve pre-gzipped version
-			expires 1y;
-		}
-	
-		location / {
-			proxy_set_header  X-Real-IP $remote_addr;
-			proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-			proxy_set_header  Host $http_host;
-			proxy_redirect    off;
-			proxy_pass        http://rubynas;
-		}
-	}
-
-Activate the configuration and disable the default:
-
-	sudo ln -nfs /etc/nginx/sites-available/rubynas /etc/nginx/sites-enabled/rubynas
-	sudo rm /etc/nginx/sites-enabled/default
-
-Restart the server:
-
-	sudo /etc/init.d/nginx restart
-
+	  cap deploy:debian

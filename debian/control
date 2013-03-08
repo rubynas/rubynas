@@ -7,7 +7,7 @@ Standards-Version: 3.7.3
 
 Package: rubynas
 Architecture: all
-Depends: ${misc:Depends}, ruby1.9.3, ruby-bundler, libsqlite3-0
+Depends: ${misc:Depends}, ruby1.9.3, ruby-bundler, libsqlite3-0, slapd, ldap-utils, nginx
 Description: RubyNAS
  A ruby based NAS system. Purly RubyNAS.
  

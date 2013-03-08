@@ -13,3 +13,4 @@ Rakefile      				opt/rubynas
 deploy        				opt/rubynas
 deploy/rubynas.logrotate 	etc/logrotate.d
 deploy/rubynas				etc/default
+deploy/nginx/*				etc/nginx/sites-available
