@@ -1,21 +1,23 @@
 # AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
-# CRC32 b1d301f8
+# CRC32 c0ec2fe7
 dn: cn=admin@rubynas.com
 objectClass: inetOrgPerson
-objectClass: authorizations
 objectClass: organizationalPerson
 objectClass: person
 objectClass: top
+objectClass: posixAccount
 sn: Admin
 uid: example_admin
 cn: admin@rubynas.com
-authorizationRole: blogAdmin
 userPassword:: e1NIQX01ZW42RzZNZXpScm9UM1hLcWtkUE9tWS9CZlE9
 structuralObjectClass: inetOrgPerson
 entryUUID: f1a6693d-c772-4584-a116-1ab2c0883566
 creatorsName: cn=admin,dc=rubynas,dc=com
 createTimestamp: 20130302174143Z
 mail: admin@rubynas.com
-entryCSN: 20130307180112.108266Z#000000#000#000000
+gidNumber: 0
+uidNumber: 0
+homeDirectory: /root
+entryCSN: 20130308064425.608889Z#000000#000#000000
 modifiersName: cn=admin,dc=rubynas,dc=com
-modifyTimestamp: 20130307180112Z
+modifyTimestamp: 20130308064425Z
