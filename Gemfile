@@ -44,8 +44,9 @@ gem 'devise_ldap_authenticatable'
 # Frontend
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
-gem 'bootstrap_form'
 gem 'angular-rails'
+gem 'bootstrap_form'
+gem 'slim'
 
 # Service management
 gem 'foreman'
@@ -53,12 +54,16 @@ gem 'puma'
 
 # Middleware API
 gem 'grape'
+gem 'grape-entity'
 
 # System logging
 gem 'lumberjack'
 gem 'lumberjack_syslog_device'
 
 gem 'rb-fsevent', '~> 0.9'
+
+# Ldap access layer
+gem 'activeldap', '~> 3.2.2', :require => 'active_ldap'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
