@@ -46,6 +46,7 @@ gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap_form'
 gem 'angular-rails'
+gem 'holder_rails'
 
 # Service management
 gem 'foreman'
