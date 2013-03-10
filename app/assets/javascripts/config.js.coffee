@@ -1,12 +1,6 @@
 # app
 rubynas = angular.module('rubynas', ['layout', 'user'])
 
-# application errors
-rubynas.factory '$exceptionHandler', ($injector) ->
-  (exception, cause) ->
-    console.log exception.message
-    console.log exception
-
 # backend errors
 rubynas.factory 'httpErrorInterceptor', ($q) ->
   (promise) ->
