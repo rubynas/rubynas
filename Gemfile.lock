@@ -244,6 +244,9 @@ GEM
     slim (1.3.6)
       temple (~> 0.5.5)
       tilt (~> 1.3.3)
+    slim_assets (0.0.2)
+      slim
+      tilt
     slop (3.4.3)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -310,6 +313,7 @@ DEPENDENCIES
   shoulda-matchers
   simplecov
   simplecov-rcov-text
+  slim_assets
   sqlite3
   therubyracer
   twitter-bootstrap-rails

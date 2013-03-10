@@ -1,2 +1,2 @@
 window.SystemSummaryController = ($scope) ->
-  console.log "syslog"
+  Holder.run()

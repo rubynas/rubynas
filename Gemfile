@@ -42,6 +42,7 @@ gem 'devise'
 gem 'devise_ldap_authenticatable'
 
 # Frontend
+gem 'slim_assets'
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap_form'
