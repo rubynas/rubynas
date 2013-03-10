@@ -43,16 +43,6 @@ angular.module('layout', []).
             '<h1>{{title}}</h1>' +
             '<div ng-transclude></div>' +
           '</div>' +
-          '<div id="error-info" class="modal hide fade" ng-controller="ErrorController">' +
-            '<div class="modal-header alert-error">' +
-              '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' +
-              '<h3>HTTP {{error.http.status}}</h3>' +
-              '<p>{{error.http.method}} {{error.http.url}}</p>' +
-            '</div>' +
-            '<div class="modal-body">' +
-              '<iframe frameborder=0 width="100%" height="10000px"/>' +
-            '</div>' +
-          '</div>' +
         '</div>',
       replace: true
     };

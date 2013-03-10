@@ -13,8 +13,6 @@ rubynas.factory 'httpErrorInterceptor', ($q, $rootScope) ->
     success = (response) ->
       response
     error = (response) ->
-      $iframe = $('#error-info').modal().find('iframe')
-      $iframe[0].contentDocument.write(response.data)
       $rootScope.$emit('httpError', response)
       $q.reject(response)
     promise.then(success, error)
