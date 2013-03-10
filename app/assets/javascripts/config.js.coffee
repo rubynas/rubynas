@@ -8,12 +8,14 @@ rubynas.factory '$exceptionHandler', ($injector) ->
     console.log exception
 
 # backend errors
-rubynas.factory 'httpErrorInterceptor', ($q) ->
+rubynas.factory 'httpErrorInterceptor', ($q, $rootScope) ->
   (promise) ->
     success = (response) ->
       response
     error = (response) ->
-      $('html').html(response.data)
+      $iframe = $('#error-info').modal().find('iframe')
+      $iframe[0].contentDocument.write(response.data)
+      $rootScope.$emit('httpError', response)
       $q.reject(response)
     promise.then(success, error)
 
