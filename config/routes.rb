@@ -3,7 +3,7 @@ Rubynas::Application.routes.draw do
   devise_for :users
 
   # api's that are called by the javascript application and others
-  mount UserAPI => '/api/users'
+  mount UserAPI => '/api'
   
   # fallback route everything will be routed to the index page. Since we use
   # the angular html histroy api a refresh will be called on a real resource
