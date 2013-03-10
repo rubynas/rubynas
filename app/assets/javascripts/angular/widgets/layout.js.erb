@@ -9,8 +9,11 @@ angular.module('layout', []).
           $location.path(path);
         }
       },
+      link: function($scope) {
+        Holder.run();
+      },
       template:
-        '<div>' +
+        '<div id="wrap">' +
           '<div class="navbar navbar-fixed-top">' +
             '<div class="navbar-inner">' +
               '<div class="container">' +

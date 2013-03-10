@@ -30,6 +30,9 @@ group :test, :development do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'capistrano'
+  
+  # Guard deps.
+  gem 'rb-fsevent', '~> 0.9'
 end
 
 group :test do
@@ -45,8 +48,9 @@ gem 'devise_ldap_authenticatable'
 # Frontend
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
-gem 'angular-rails'
 gem 'bootstrap_form'
+gem 'angular-rails'
+gem 'holder_rails'
 gem 'slim'
 
 # Service management
@@ -60,8 +64,6 @@ gem 'grape-entity'
 # System logging
 gem 'lumberjack'
 gem 'lumberjack_syslog_device'
-
-gem 'rb-fsevent', '~> 0.9'
 
 # Ldap access layer
 gem 'activeldap', '~> 3.2.2', :require => 'active_ldap'

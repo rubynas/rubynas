@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
+//= require holder
 //= require angular
 //= require angular-resource
 //= require_tree ./angular
