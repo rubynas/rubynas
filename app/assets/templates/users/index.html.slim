@@ -1,0 +1,27 @@
+layout title="Users"
+  table class="table table-striped"
+    thead
+      tr
+        td User ID
+        td Name
+        td Home Directory
+        td E-Mail
+        td Group ID
+        td
+    tbody
+      tr ng-repeat='user in users'
+        td {{user.uid_number}}
+        td {{user.common_name}}
+        td {{user.home_directory}}
+        td {{user.mail}}
+        td {{user.gid_number}}
+        td
+          div
+            a class="btn" ng-click="edit(user.common_name)"
+              | Edit
+            |  
+            a class="btn btn-danger" ng-click="remove(user.common_name)" ng-hide="user.uid_number == 0"
+              | Remove
+  
+  a class="btn" ng-click="addNew()"
+    | Add User

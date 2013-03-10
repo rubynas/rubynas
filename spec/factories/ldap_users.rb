@@ -9,6 +9,7 @@ FactoryGirl.define do
     surname "User"
     uid_number 1000
     gid_number 1000
+    userPassword { ActiveLdap::UserPassword.sha 'secret' }
   end
   
   factory :admin_ldap_user, :parent => :ldap_user do

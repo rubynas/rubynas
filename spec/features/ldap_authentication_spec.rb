@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe 'LDAP Authentication', :js => true do
+  before(:all) do
+    LdapUser.all.each(&:destroy)
+    create :ldap_user
+  end
+  
   context "with normal user" do
     before do
       visit '/'

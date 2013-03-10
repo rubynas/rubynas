@@ -1,0 +1,49 @@
+angular.module('layout', []).
+  directive('layout', function() {
+    return {
+      restrict: 'E',
+      transclude: true,
+      scope: { title: '@' },
+      controller: function($scope, $location) {
+        $scope.open = function(path) {
+          $location.path(path);
+        }
+      },
+      template:
+        '<div>' +
+          '<div class="navbar navbar-fixed-top">' +
+            '<div class="navbar-inner">' +
+              '<div class="container">' +
+                '<a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">' +
+                  '<span class="icon-bar"></span>' +
+                  '<span class="icon-bar"></span>' +
+                  '<span class="icon-bar"></span>' +
+                '</a>' +
+                '<a class="brand" href="#"><%= t('title') %></a>' +
+                '<div class="container nav-collapse">' +
+                  '<ul class="nav">' +
+                    '<li><a href="/system/summary">System</a></li>' +
+                    '<li>' +
+                      '<%= link_to(t('logout'), destroy_user_session_path, :method => :delete) %>' +
+                    '</li>' +
+                    '<li>' +
+          						'<a ng-click="open(\'/users\')" href="#">Users</a>' +
+                    '</li>' +
+                  '</ul>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="container">' +
+            '<h1>{{title}}</h1>' +
+            '<div ng-transclude></div>' +
+          '</div>' +
+        '</div>',
+      replace: true
+    };
+  });
+
+	
+
+	
+
