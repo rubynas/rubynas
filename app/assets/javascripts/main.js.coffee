@@ -1,3 +1,22 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+angular.module('rubynas', [
+  'layout', 'user', 'httperror', 'httperror-interceptor'
+]).config ($routeProvider, $locationProvider, $httpProvider) ->
+  # Show backend http errors
+  $httpProvider.responseInterceptors.push('httpErrorInterceptor')
+  
+  # Enable HTML 5 History API
+  $locationProvider.html5Mode(true)
+  
+  # Application routes
+  $routeProvider
+    .when "/system/summary",
+      controller: SystemSummaryController,
+      templateUrl: "/assets/system/summary.html"
+    .when "/users",
+      controller: UserListController,
+      templateUrl: "/assets/users/index.html"
+    .when "/users/:cn",
+      controller: UserController,
+      templateUrl: "/assets/users/form.html"
+    .otherwise
+      redirectTo: '/system/summary'
