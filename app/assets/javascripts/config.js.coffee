@@ -1,20 +1,13 @@
-# app
-rubynas = angular.module('rubynas', ['layout', 'user'])
-
-# backend errors
-rubynas.factory 'httpErrorInterceptor', ($q, $rootScope) ->
-  (promise) ->
-    success = (response) ->
-      response
-    error = (response) ->
-      $rootScope.$emit('httpError', response)
-      $q.reject(response)
-    promise.then(success, error)
-
-# configuration
-rubynas.config ($routeProvider, $locationProvider, $httpProvider) ->
+angular.module('rubynas', [
+  'layout', 'user', 'httperror', 'httperror-interceptor'
+]).config ($routeProvider, $locationProvider, $httpProvider) ->
+  # Show backend http errors
   $httpProvider.responseInterceptors.push('httpErrorInterceptor')
+  
+  # Enable HTML 5 History API
   $locationProvider.html5Mode(true)
+  
+  # Application routes
   $routeProvider
     .when "/system/summary",
       controller: SystemSummaryController,
@@ -27,5 +20,3 @@ rubynas.config ($routeProvider, $locationProvider, $httpProvider) ->
       templateUrl: "/assets/users/form.html"
     .otherwise
       redirectTo: '/system/summary'
-
-
