@@ -2,12 +2,12 @@
 rubynas = angular.module('rubynas', ['layout', 'user'])
 
 # backend errors
-rubynas.factory 'httpErrorInterceptor', ($q) ->
+rubynas.factory 'httpErrorInterceptor', ($q, $rootScope) ->
   (promise) ->
     success = (response) ->
       response
     error = (response) ->
-      $('html').html(response.data)
+      $rootScope.$emit('httpError', response)
       $q.reject(response)
     promise.then(success, error)
 

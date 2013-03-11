@@ -23,14 +23,16 @@ angular.module('layout', []).
                   '<span class="icon-bar"></span>' +
                 '</a>' +
                 '<a class="brand" href="#"><%= t('title') %></a>' +
-                '<div class="container nav-collapse">' +
+                '<div class="nav-collapse">' +
                   '<ul class="nav">' +
                     '<li><a href="/system/summary">System</a></li>' +
                     '<li>' +
-                      '<%= link_to(t('logout'), destroy_user_session_path, :method => :delete) %>' +
-                    '</li>' +
-                    '<li>' +
           						'<a ng-click="open(\'/users\')" href="#">Users</a>' +
+                    '</li>' +
+                  '</ul>' +
+                  '<ul class="nav pull-right">' +
+                    '<li>' +
+                      '<%= link_to(t('logout'), destroy_user_session_path, :method => :delete) %>' +
                     '</li>' +
                   '</ul>' +
                 '</div>' +
