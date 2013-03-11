@@ -1,0 +1,22 @@
+#wrap
+  div class="navbar navbar-fixed-top"
+    div class="navbar-inner"
+      div class="container"
+        a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse"
+          span class="icon-bar"
+          span class="icon-bar"
+          span class="icon-bar"
+        a class="brand" href="#"
+          = t('title')
+        div class="nav-collapse"
+          ul class="nav"
+            li
+              a href="/system/summary" System
+            li
+              a ng-click="open('users')" href="#" Users
+          ul class="nav pull-right"
+            li
+              = link_to(t('logout'), destroy_user_session_path, :method => :delete)
+  div class="container"
+    h1 {{title}}
+    div(ng-transclude)
