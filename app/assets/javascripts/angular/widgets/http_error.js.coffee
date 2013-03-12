@@ -11,9 +11,9 @@ angular.module('httpError', [])
         $q.reject(response)
       promise.then(success, error)
   .directive 'httpError', (httpErrorHandler) ->
-    link: ($scope) ->
+    link: ($scope, $digest) ->
       httpErrorHandler.setup (response) ->
-        $iframe = $('#error-info').modal().find('iframe')
+        $iframe = $digest.find('.http-error.modal').modal().find('iframe')
         $iframe[0].contentDocument.write(response.data)
         $scope.error =
           http:

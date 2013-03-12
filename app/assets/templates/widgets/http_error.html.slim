@@ -1,9 +1,9 @@
-div id="error-info" class="modal hide fade"
-  div class="modal-header alert-error"
+.http-error.modal.hide.fade
+  .modal-header.alert-error
     button type="button" class="close" data-dismiss="modal" aria-hidden="true" &times;
     h3 HTTP {{error.http.status}}
     p {{error.http.method}} {{error.http.url}}
-  div class="modal-body"
-    div ng-include="'/error.html'"
-    script type="text/ng-template" id="/error.html"
+  .modal-body
+    div ng-include="'/http_error_iframe.html'"
+    script type="text/ng-template" id="/http_error_iframe.html"
       iframe frameborder=0 width="100%" height="10000px"
