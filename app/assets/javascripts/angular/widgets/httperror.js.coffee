@@ -1,5 +1,14 @@
-angular.module('httperror', []).
-  directive 'httperror', () ->
+angular.module('httperror', [])
+  .factory 'httpErrorInterceptor', ($q, $rootScope) ->
+    (promise) ->
+      success = (response) ->
+        response
+      error = (response) ->
+        console.log "errorEmited"
+        $rootScope.$emit('httpError', response)
+        $q.reject(response)
+      promise.then(success, error)
+  .directive 'httperror', () ->
     restrict: 'E'
     controller: ($rootScope, $scope) ->
       $rootScope.$on 'httpError', (event, response) ->
