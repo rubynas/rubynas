@@ -1,4 +1,4 @@
-angular.module('httperror', [])
+angular.module('httpError', [])
   .factory 'httpErrorInterceptor', ($q, $rootScope) ->
     (promise) ->
       success = (response) ->
@@ -8,8 +8,7 @@ angular.module('httperror', [])
         $rootScope.$emit('httpError', response)
         $q.reject(response)
       promise.then(success, error)
-  .directive 'httperror', () ->
-    restrict: 'E'
+  .directive 'httpError', () ->
     controller: ($rootScope, $scope) ->
       $rootScope.$on 'httpError', (event, response) ->
         $iframe = $('#error-info').modal().find('iframe')
@@ -19,5 +18,4 @@ angular.module('httperror', [])
             status: response.status,
             url: response.config.url,
             method: response.config.method
-    templateUrl: "/assets/widgets/httperror.html"
-    replace: true
+    templateUrl: "/assets/widgets/http_error.html"
