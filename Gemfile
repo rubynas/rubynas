@@ -69,6 +69,9 @@ gem 'lumberjack_syslog_device'
 # Ldap access layer
 gem 'activeldap', '~> 3.2.2', :require => 'active_ldap'
 
+# System information
+gem 'sys-uptime', :require => 'sys/uptime'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
