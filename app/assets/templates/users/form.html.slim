@@ -1,51 +1,78 @@
 layout title="User"
   form class="form-horizontal" ng-submit="save()"
-    div class="control-group"
-      label class="control-label" for="common_name"
-        | CommonName
-      div class="controls"
-        input type="text" id="common_name" ng-model="user.common_name"
-    div class="control-group"
-      label class="control-label" for="uid"
-        | Login
-      div class="controls"
-        input type="text" id="uid" ng-model="user.uid"
-    div class="control-group"
-      label class="control-label" for="mail"
-        | Email
-      div class="controls"
-        input type="text" id="mail" ng-model="user.mail"
-    div class="control-group"
-      label class="control-label" for="given_name"
-        | Given Name
-      div class="controls"
-        input type="text" id="given_name" ng-model="user.given_name"
-    div class="control-group"
-      label class="control-label" for="surname"
-        | Surname
-      div class="controls"
-        input type="text" id="surname" ng-model="user.surname"
-    div class="control-group"
-      label class="control-label" for="home_directory"
-        | Home Directory
-      div class="controls"
-        input type="text" id="home_directory" ng-model="user.home_directory"
-    div class="control-group"
-      label class="control-label" for="uid_number"
-        | User ID
-      div class="controls"
-        input type="text" id="uid_number" ng-model="user.uid_number"
-    div class="control-group"
-      label class="control-label" for="gid_number"
-        | Group ID
-      div class="controls"
-        input type="text" id="gid_number" ng-model="user.gid_number"
-    div class="control-group"
-      label class="control-label" for="password"
-        | Password
-      div class="controls"
-        input type="password" id="password" ng-model="user.password"
-    div class="control-group"
-      div class="controls"
-        button class="btn" type="submit"
-					| Save
+    row
+      h3.span12 Basics
+    row
+      .span4
+        div class="control-group"
+          label class="control-label" for="common_name"
+            | CommonName
+          div class="controls"
+            input type="text" id="common_name" ng-model="user.common_name"
+        div class="control-group"
+          label class="control-label" for="mail"
+            | Email
+          div class="controls"
+            input type="text" id="mail" ng-model="user.mail"
+      .span1
+      .span4
+        div class="control-group"
+          label class="control-label" for="given_name"
+            | Given Name
+          div class="controls"
+            input type="text" id="given_name" ng-model="user.given_name"
+        div class="control-group"
+          label class="control-label" for="surname"
+            | Surname
+          div class="controls"
+            input type="text" id="surname" ng-model="user.surname"
+    row
+      h3.span12 Account
+    row
+      .span4
+        div class="control-group"
+          label class="control-label" for="uid"
+            | Login
+          div class="controls"
+            input type="text" id="uid" ng-model="user.uid"
+        div class="control-group"
+          label class="control-label" for="home_directory"
+            | Home Directory
+          div class="controls"
+            input type="text" id="home_directory" ng-model="user.home_directory"
+      .span1
+      .span4
+        div class="control-group"
+          label class="control-label" for="uid_number"
+            | User ID
+          div class="controls"
+            select id="uid_number" ng-model="user.uid_number"
+              option value="0" Root
+        div class="control-group"
+          label class="control-label" for="gid_number"
+            | Group ID
+          div class="controls"
+            select id="gid_number" ng-model="user.gid_number"
+              option value="0" Root
+    row
+      h3.span9 Password
+    row
+      .span4
+        div class="control-group"
+          label class="control-label" for="password"
+            | Password
+          div class="controls"
+            input type="password" id="password" ng-model="user.password"
+      .span1
+      .span4
+        div class="control-group"
+          label class="control-label" for="password_verify"
+            | Verify
+          div class="controls"
+            input type="password" id="password_verify" ng-model="user.password_verify"
+    row
+      .span9
+        div class="control-group"
+          div class="controls"
+            button class="btn" type="submit"
+      				| Save
