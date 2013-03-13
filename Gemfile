@@ -51,6 +51,7 @@ gem 'twitter-bootstrap-rails'
 gem 'bootstrap_form'
 gem 'angular-rails'
 gem 'holder_rails'
+gem 'rails-timeago'
 gem 'slim'
 
 # Service management

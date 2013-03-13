@@ -6,7 +6,7 @@ layout title="System Summary"
           strong OK.
           span  All services online!
           span.pull-right
-            = "since #{time_ago_in_words(Time.now - 12.hours)}"
+            = "{{'#{Time.now - 12.hours}' | timeago}}"
       .span12
         ul.thumbnails
           li = holder_tag '200x200', 'Services'
