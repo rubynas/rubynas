@@ -1,18 +1,17 @@
 angular.module('httpError', [])
-  .service 'httpErrorHandler', () ->
-    setup: (handler) ->
-      @.trigger = handler
-  .factory 'httpErrorInterceptor', ($q, httpErrorHandler) ->
+  .service 'httpErrorScope', ($rootScope) ->
+    $rootScope.$new()
+  .factory 'httpErrorInterceptor', ($q, httpErrorScope) ->
     (promise) ->
       success = (response) ->
         response
       error = (response) ->
-        httpErrorHandler.trigger response
+        httpErrorScope.$emit 'error', response
         $q.reject(response)
       promise.then(success, error)
-  .directive 'httpError', (httpErrorHandler) ->
+  .directive 'httpError', (httpErrorScope) ->
     link: ($scope, $digest) ->
-      httpErrorHandler.setup (response) ->
+      httpErrorScope.$on 'error', (event, response) ->
         $iframe = $digest.find('.http-error.modal').modal().find('iframe')
         $iframe[0].contentDocument.write(response.data)
         $scope.error =
