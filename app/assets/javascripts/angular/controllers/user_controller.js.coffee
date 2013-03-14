@@ -3,7 +3,8 @@ window.UserController = ($scope, $location, $routeParams, User) ->
     $scope.user = new User()
   else
     $scope.user = User.get(cn: $routeParams.cn)
-    
+  
+  # Create default values for all other fields based on the entered common name.
   $scope.createDefaults = () ->
     names = $scope.user.common_name.split(" ")
     
@@ -21,7 +22,8 @@ window.UserController = ($scope, $location, $routeParams, User) ->
   
   $scope.save = () ->
     if $routeParams.cn == 'new'
-      User.save($scope.user)
+      User.save $scope.user
     else
       # update
       User.update({cn: $routeParams.cn}, $scope.user)
+    $location.path('/users')

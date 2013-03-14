@@ -1,78 +1,87 @@
 layout title="User"
-  form name="userForm" class="form-horizontal" ng-submit="save()"
-    row
-      h3.span12 Basics
-    row
+  form.form-horizontal name="userForm" ng-submit="save()"
+    .row
+      .span10
+        h3 Basics
+    .row
       .span4
-        div class="control-group"
-          label class="control-label" for="common_name"
+        .control-group
+          label.control-label for="common_name"
             | CommonName
-          div class="controls"
+          div.controls
             input type="text" id="common_name" ng-model="user.common_name" required="required" ng-change="createDefaults()"
-        div class="control-group"
-          label class="control-label" for="mail"
+        .control-group
+          label.control-label for="mail"
             | Email
-          div class="controls"
+          div.controls
             input type="text" id="mail" ng-model="user.mail" required="required"
       .span1
       .span4
-        div class="control-group"
-          label class="control-label" for="given_name"
-            | Given Name
-          div class="controls"
+        .control-group
+          label.control-label for="given_name"
+            | Firstname
+          div.controls
             input type="text" id="given_name" ng-model="user.given_name" required="required"
-        div class="control-group"
-          label class="control-label" for="surname"
+        .control-group
+          label.control-label for="surname"
             | Surname
-          div class="controls"
+          div.controls
             input type="text" id="surname" ng-model="user.surname" required="required"
-    row
-      h3.span12 Account
-    row
+      .span1
+    .row
+      .span10
+        h3 Account
+    .row
       .span4
-        div class="control-group"
-          label class="control-label" for="uid"
+        .control-group
+          label.control-label for="uid"
             | Login
-          div class="controls"
+          div.controls
             input type="text" id="uid" ng-model="user.uid" required="required"
-        div class="control-group"
-          label class="control-label" for="home_directory"
+        .control-group
+          label.control-label for="home_directory"
             | Home Directory
-          div class="controls"
+          div.controls
             input type="text" id="home_directory" ng-model="user.home_directory" required="required"
       .span1
       .span4
-        div class="control-group"
-          label class="control-label" for="uid_number"
+        .control-group
+          label.control-label for="uid_number"
             | User ID
-          div class="controls"
-            select id="uid_number" ng-model="user.uid_number" required="required"
-              option value="0" Root
-        div class="control-group"
-          label class="control-label" for="gid_number"
+          div.controls
+            input type="text" id="uid_number" ng-model="user.uid_number" required="required"
+        .control-group
+          label.control-label for="gid_number"
             | Group ID
-          div class="controls"
+          div.controls
             select id="gid_number" ng-model="user.gid_number" required="required"
-              option value="0" Root
-    row
-      h3.span9 Password
-    row
+              option value="0" Administrator
+      .span1
+    .row
+      .span10
+        h3 Password
+    .row ng-hide="user.password == user.password_verify"
+      .span10
+        p.alert
+          | Password dosn't match!
+    .row
       .span4
-        div class="control-group"
-          label class="control-label" for="password"
+        .control-group
+          label.control-label for="password"
             | Password
-          div class="controls"
+          div.controls
             input type="password" id="password" ng-model="user.password" required="required"
       .span1
       .span4
-        div class="control-group"
-          label class="control-label" for="password_verify"
+        .control-group
+          label.control-label for="password_verify"
             | Verify
-          div class="controls"
+          div.controls
             input type="password" id="password_verify" ng-model="user.password_verify" required="required"
-    row
-      .span9
-        div class="control-group"
-          div class="controls"
-            button class="btn" type="submit" ng-disabled="userForm.$invalid"
+      .span1
+    .row
+      .span10
+        .control-group
+          div.controls
+            button class="btn" type="submit" ng-disabled="userForm.$invalid || (user.password != user.password_verify)"
       				| Save
