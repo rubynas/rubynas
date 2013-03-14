@@ -17,7 +17,7 @@ class UserAPI < Grape::API
       :object_fields => UserAPI::User.documentation
     }
     get '/' do
-       present LdapUser.all, with: UserAPI::User
+      present LdapUser.all, with: UserAPI::User
     end
     
     desc "Adds new user to the ldap"
