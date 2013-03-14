@@ -1,5 +1,5 @@
 layout title="User"
-  form class="form-horizontal" ng-submit="save()"
+  form name="userForm" class="form-horizontal" ng-submit="save()"
     row
       h3.span12 Basics
     row
@@ -8,24 +8,24 @@ layout title="User"
           label class="control-label" for="common_name"
             | CommonName
           div class="controls"
-            input type="text" id="common_name" ng-model="user.common_name"
+            input type="text" id="common_name" ng-model="user.common_name" required="required" ng-change="createDefaults()"
         div class="control-group"
           label class="control-label" for="mail"
             | Email
           div class="controls"
-            input type="text" id="mail" ng-model="user.mail"
+            input type="text" id="mail" ng-model="user.mail" required="required"
       .span1
       .span4
         div class="control-group"
           label class="control-label" for="given_name"
             | Given Name
           div class="controls"
-            input type="text" id="given_name" ng-model="user.given_name"
+            input type="text" id="given_name" ng-model="user.given_name" required="required"
         div class="control-group"
           label class="control-label" for="surname"
             | Surname
           div class="controls"
-            input type="text" id="surname" ng-model="user.surname"
+            input type="text" id="surname" ng-model="user.surname" required="required"
     row
       h3.span12 Account
     row
@@ -34,25 +34,25 @@ layout title="User"
           label class="control-label" for="uid"
             | Login
           div class="controls"
-            input type="text" id="uid" ng-model="user.uid"
+            input type="text" id="uid" ng-model="user.uid" required="required"
         div class="control-group"
           label class="control-label" for="home_directory"
             | Home Directory
           div class="controls"
-            input type="text" id="home_directory" ng-model="user.home_directory"
+            input type="text" id="home_directory" ng-model="user.home_directory" required="required"
       .span1
       .span4
         div class="control-group"
           label class="control-label" for="uid_number"
             | User ID
           div class="controls"
-            select id="uid_number" ng-model="user.uid_number"
+            select id="uid_number" ng-model="user.uid_number" required="required"
               option value="0" Root
         div class="control-group"
           label class="control-label" for="gid_number"
             | Group ID
           div class="controls"
-            select id="gid_number" ng-model="user.gid_number"
+            select id="gid_number" ng-model="user.gid_number" required="required"
               option value="0" Root
     row
       h3.span9 Password
@@ -62,17 +62,17 @@ layout title="User"
           label class="control-label" for="password"
             | Password
           div class="controls"
-            input type="password" id="password" ng-model="user.password"
+            input type="password" id="password" ng-model="user.password" required="required"
       .span1
       .span4
         div class="control-group"
           label class="control-label" for="password_verify"
             | Verify
           div class="controls"
-            input type="password" id="password_verify" ng-model="user.password_verify"
+            input type="password" id="password_verify" ng-model="user.password_verify" required="required"
     row
       .span9
         div class="control-group"
           div class="controls"
-            button class="btn" type="submit"
+            button class="btn" type="submit" ng-disabled="userForm.$invalid"
       				| Save
