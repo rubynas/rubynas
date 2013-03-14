@@ -1,0 +1,37 @@
+@font-face { font-family: Varela; src: url('Varela-Regular.otf'); }
+
+@import "compass/css3/transition";
+
+.navbar .brand {
+  background-repeat: no-repeat;
+  background-image: image-url('rubynas-64-sw.png');
+  background-position: 120px 20px;
+  padding-right: 100px;
+  background-size: 64px;
+  font-family: Varela;
+  font-weight: bold;
+
+  @include transition(background 1s);
+  span {
+    @include transition(color 0.5s);
+  }
+
+  &:hover {
+    background-image: image-url('rubynas-64.png');
+    background-position: 120px -18px;
+    .red { color: #cc0000;}
+    .black { color: #000; }
+  }
+}
+
+@media
+(-o-min-device-pixel-ratio: 5/4),
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 120dpi) {
+  .navbar .brand {
+    background-image: image-url('rubynas-128-sw.png');
+    &:hover {
+      background-image: image-url('rubynas-128.png');
+    }
+  }
+}
