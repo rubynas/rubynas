@@ -1,4 +1,5 @@
-window.UserController = ($scope, $location, $routeParams, User) ->
+window.UserController = ($scope, $location, $routeParams, User, Group) ->
+  $scope.groups = Group.query()
   if $routeParams.cn == 'new'
     $scope.user = new User()
   else

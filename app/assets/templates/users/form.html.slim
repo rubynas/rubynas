@@ -54,8 +54,7 @@ layout title="User"
           label.control-label for="gid_number"
             | Group ID
           div.controls
-            select id="gid_number" ng-model="user.gid_number" required="required"
-              option value="0" Administrator
+            select id="gid_number" ng-model="user.gid_number" required="required" ng-options="group.gid_number as group.common_name for group in groups"
       .span1
     .row
       .span10

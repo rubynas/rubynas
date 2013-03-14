@@ -4,6 +4,7 @@ Rubynas::Application.routes.draw do
 
   # api's that are called by the javascript application and others
   mount UserAPI => '/api'
+  mount GroupAPI => '/api'
   mount SystemInformationAPI => '/api'
   
   # fallback route everything will be routed to the index page. Since we use
