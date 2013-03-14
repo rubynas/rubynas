@@ -16,5 +16,6 @@
 //= require holder
 //= require angular
 //= require angular-resource
+//= require rails-timeago
 //= require_tree ./angular
 //= require_tree .
