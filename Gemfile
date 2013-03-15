@@ -18,6 +18,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'less-rails'
   gem 'slim_assets'
+  gem 'compass-rails'
 end
 
 group :test, :development do

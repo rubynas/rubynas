@@ -1,4 +1,4 @@
-# RubyNAS
+# rubynas
 
 ## Getting started
 
