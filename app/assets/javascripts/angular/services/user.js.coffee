@@ -3,3 +3,7 @@ angular.module('user', ['ngResource']).
     $resource '/api/users/:cn', {}, 
       update:
         method: 'PUT'
+      template:
+        method: 'GET'
+        params:
+          cn: 'template'

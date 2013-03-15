@@ -23,6 +23,30 @@ describe 'Restful User API' do
     its(:body) { should_not include('userPassword') }
   end
   
+  context "GET /users/template" do
+    before do
+      get '/users/template'
+    end
+    subject { last_response }
+
+    it { should be_ok }
+    its(:body) { should include('1000') }
+    its(:body) { should include('/home/') }
+
+    context "with one user" do
+      before do
+        create :ldap_user
+        get '/users/template' 
+      end
+      subject { last_response }
+
+      it { should be_ok }
+      its(:body) { should include('1001') }
+      its(:body) { should include('/home/') }
+      its(:body) { should include('1000') } # group
+    end
+  end
+
   context "POST /users" do
     it "creates a new user" do
       post '/users', :common_name => 'John Doe',

@@ -20,6 +20,17 @@ class UserAPI < Grape::API
       present LdapUser.all, with: UserAPI::User
     end
     
+    desc "Returns a template for new users", {
+      :object_fields => UserAPI::User.documentation
+    }
+    get '/template' do
+      next_uid_number = LdapUser.all.map(&:uid_number).max.to_i + 1
+      next_uid_number = 1000 if next_uid_number < 1000
+      { uid_number: next_uid_number,
+        gid_number: 1000,
+        home_directory: "/home/" }
+    end
+
     desc "Adds new user to the ldap"
     params do
       requires :common_name
