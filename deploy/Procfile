@@ -1,1 +1,1 @@
-web: ruby1.9.3 -S puma -p $PORT
+web: exec ruby1.9.3 -S puma -p $PORT
