@@ -51,4 +51,5 @@ Install and configure LDAP:
 
 Build and install the service:
 
-	  cap deploy:debian
+    cap deploy:debian
+
