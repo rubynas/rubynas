@@ -7,7 +7,7 @@ class GroupAPI < Grape::API
   end
   
   resource :groups do
-    desc "Returns the list of users in the ldap", {
+    desc "Returns the list of groups in the ldap", {
       :object_fields => GroupAPI::Group.documentation
     }
     get '/' do
@@ -31,6 +31,16 @@ class GroupAPI < Grape::API
       rescue ActiveLdap::EntryNotFound
         throw :error, :status => 404
       end
+    end
+    
+    desc "Add a new group"
+    params do
+      requires :common_name, type: String
+      requires :gid_number, type: Fixnum
+    end
+    post '/' do
+      LdapGroup.create(params)
+      ""
     end
   end
 end

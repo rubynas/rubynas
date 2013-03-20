@@ -63,4 +63,16 @@ describe 'Restful Group API' do
       its(:status) { should == 404 }
     end
   end
+  
+  context "POST /groups" do
+    it "adds a new group" do
+      post '/groups', common_name: "Foo", gid_number: 1001
+      last_response.status.should == 201
+    end
+    
+    it "returns a 400 if params are missing" do
+      post '/groups'
+      last_response.status.should == 400
+    end
+  end
 end
