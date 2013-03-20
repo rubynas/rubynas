@@ -13,5 +13,10 @@ class GroupAPI < Grape::API
     get '/' do
       present LdapGroup.all, with: GroupAPI::Group
     end
+    
+    desc "Return a single group"
+    get '/:cn' do
+      present LdapGroup.find(params[:cn]), with: GroupAPI::Group
+    end
   end
 end
