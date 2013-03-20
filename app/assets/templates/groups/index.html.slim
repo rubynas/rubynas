@@ -1,0 +1,21 @@
+layout title="Groups"
+  table class="table table-striped"
+    thead
+      tr
+        td Group ID
+        td Name
+        td
+    tbody
+      tr ng-repeat='group in groups'
+        td {{group.gid_number}}
+        td {{group.common_name}}
+        td
+          div
+            a class="btn" ng-click="edit(group.common_name)"
+              | Edit
+            |  
+            a class="btn btn-danger" ng-click="remove(group.common_name)" ng-hide="user.uid_number == 0"
+              | Remove
+  
+  a class="btn" ng-click="addNew()"
+    | Add Group

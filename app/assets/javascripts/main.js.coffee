@@ -20,5 +20,11 @@ angular.module('rubynas', [
     .when "/users/:cn",
       controller: UserController,
       templateUrl: "/assets/users/form.html"
+    .when "/groups",
+      controller: GroupListController,
+      templateUrl: "/assets/groups/index.html"
+    .when "/groups/:cn",
+      controller: GroupController,
+      templateUrl: "/assets/groups/form.html"
     .otherwise
       redirectTo: '/system/summary'
