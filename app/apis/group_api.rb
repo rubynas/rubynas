@@ -16,7 +16,21 @@ class GroupAPI < Grape::API
     
     desc "Return a single group"
     get '/:cn' do
-      present LdapGroup.find(params[:cn]), with: GroupAPI::Group
+      begin
+        present LdapGroup.find(params[:cn]), with: GroupAPI::Group
+      rescue ActiveLdap::EntryNotFound
+        throw :error, :status => 404
+      end
+    end
+    
+    desc "Delete the passed group"
+    delete '/:cn' do
+      begin
+        LdapGroup.find(params[:cn]).destroy
+        ""
+      rescue ActiveLdap::EntryNotFound
+        throw :error, :status => 404
+      end
     end
   end
 end

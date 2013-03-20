@@ -42,4 +42,25 @@ describe 'Restful Group API' do
       its(:status) { should == 404 }
     end
   end
+  
+  context "DELETE /groups" do
+    context "with group" do
+      before do
+        create :user_ldap_group
+        LdapGroup.all.should_not be_empty
+        delete '/groups/Users' 
+      end
+      subject { last_response }
+    
+      it { should be_ok }
+      specify { LdapGroup.all.should be_empty }
+    end
+
+    context "without user" do
+      before { delete '/groups/Users' }
+      subject { last_response }
+  
+      its(:status) { should == 404 }
+    end
+  end
 end
