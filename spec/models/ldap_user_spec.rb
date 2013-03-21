@@ -3,7 +3,7 @@ require 'spec_helper'
 describe LdapUser do
   context "#find_or_create_admin" do
     before do
-      if user = (LdapUser.find(:cn => Admin) rescue nil)
+      if user = (LdapUser.find(:cn => 'Admin') rescue nil)
         user.destroy
       end
     end

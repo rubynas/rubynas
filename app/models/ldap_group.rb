@@ -9,4 +9,13 @@ class LdapGroup < ActiveLdap::Base
   # Associate with all belonged users
   has_many :members, :wrap => "memberUid",
            :class_name => "LdapUser", :primary_key => 'uid'
+
+  # Creates or finds the admin group. The common name has to be 'Administrators'
+  # @return [LdapGroup]
+  def self.find_or_create_administrators
+    group = LdapGroup.find('Administrators') rescue nil
+    group ||= LdapGroup.create :common_name => "Administrators",
+                               :gid_number => 0
+    group
+  end
 end
