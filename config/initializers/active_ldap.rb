@@ -10,9 +10,10 @@ ActiveLdap::Base.setup_connection(
 )
 
 # Setup default account and structure if they don't exist in the repository
+LdapOrgUnit.find_or_create('users')
+LdapOrgUnit.find_or_create('groups')
+  
 unless Rails.env.test?
-  LdapOrgUnit.find_or_create('users')
-  LdapOrgUnit.find_or_create('groups')
   LdapUser.find_or_create_admin
   LdapGroup.find_or_create_administrators
 end

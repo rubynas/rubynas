@@ -16,6 +16,7 @@
 
 # Sandbox
 sandbox/ldap/data/slapd.*
+sandbox/ldap/data/dc=rubynas,dc=com/
 
 .DS_Store
 .vagrant
