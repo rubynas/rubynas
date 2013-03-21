@@ -1,10 +1,12 @@
 window.GroupController = ($scope, $location, $routeParams, Group) ->
   unless $routeParams.cn == 'new'
     $scope.group = Group.get(cn: $routeParams.cn)
+  else
+    $scope.group = new Group()
   
   $scope.save = () ->
     if $routeParams.cn == 'new'
-      Group.save $scope.group
+      Group.save($scope.group)
     else
       # update
       Group.update({cn: $routeParams.cn}, $scope.group)

@@ -75,4 +75,23 @@ describe 'Restful Group API' do
       last_response.status.should == 400
     end
   end
+  
+  context "PUT /groups/:cn" do
+    context "with user" do
+      before do
+        create :user_ldap_group
+        put '/groups/Users', common_name: "Foo", gid_number: 1001
+      end
+      subject { LdapGroup.find('Users') }
+      
+      its(:gid_number) { should == 1001 }
+    end
+    
+    context "without user" do
+      before { put '/groups/Users', common_name: "Foo", gid_number: 1001 }
+      subject { last_response }
+  
+      its(:status) { should == 404 }
+    end
+  end
 end

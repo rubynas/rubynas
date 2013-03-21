@@ -42,5 +42,19 @@ class GroupAPI < Grape::API
       LdapGroup.create(params)
       ""
     end
+    
+    desc "Update a group completely"
+    params do
+      requires :common_name, type: String
+      requires :gid_number, type: Fixnum
+    end
+    put '/:cn' do
+      begin
+        LdapGroup.find(params.delete(:cn)).update_attributes(params)
+        ""
+      rescue ActiveLdap::EntryNotFound
+        throw :error, :status => 404
+      end
+    end
   end
 end
