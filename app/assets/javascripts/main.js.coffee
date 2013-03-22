@@ -1,6 +1,6 @@
 angular.module('rubynas', [
   'layout', 'httpError'
-  'user', 'group', 'system_information',
+  'user', 'group', 'system_information', 'volume'
   'timeago'
 ]).config ($routeProvider, $locationProvider, $httpProvider) ->
   # Show backend http errors
@@ -26,5 +26,8 @@ angular.module('rubynas', [
     .when "/groups/:cn",
       controller: GroupController,
       templateUrl: "/assets/groups/form.html"
+    .when "/volumes",
+      controller: VolumeListController,
+      templateUrl: "/assets/volumes/index.html"
     .otherwise
       redirectTo: '/system/summary'

@@ -25,6 +25,9 @@
                   li
                     a ng-click="open('groups')" href="#"
                       | Groups
+                  li
+                    a ng-click="open('volumes')" href="#"
+                      | Volumes
           ul class="nav pull-right"
             li
               = link_to(t('logout'), destroy_user_session_path, :method => :delete)

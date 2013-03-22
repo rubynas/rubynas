@@ -1,0 +1,25 @@
+layout title="Volumes"
+  table class="table table-striped"
+    thead
+      tr
+        td Name
+        td Path
+        td Capacity
+        td Usage
+        td
+    tbody
+      tr ng-repeat='volume in volumes'
+        td {{volume.name}}
+        td {{volume.path}}
+        td {{volume.capacity}}
+        td {{volume.usage}}
+        td
+          div
+            a class="btn" ng-click="edit(volume.id)"
+              | Edit
+            |  
+            a class="btn btn-danger" ng-click="remove(volume.id)" ng-hide="volume.path == '/'"
+              | Remove
+  
+  a class="btn" ng-click="addNew()"
+    | Add Volume
