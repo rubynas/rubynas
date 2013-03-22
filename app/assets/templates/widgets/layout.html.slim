@@ -12,11 +12,19 @@
         div class="nav-collapse"
           ul class="nav"
             li
-              a href="/system/summary" System
+              a href="/system/summary" Dashboard
             li
-              a ng-click="open('users')" href="#" Users
-            li
-              a ng-click="open('groups')" href="#" Groups
+              div class="btn-group"
+                a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
+                  | System 
+                  span class="caret"
+                ul class="dropdown-menu"
+                  li
+                    a ng-click="open('users')" href="#"
+                      | Users
+                  li
+                    a ng-click="open('groups')" href="#"
+                      | Groups
           ul class="nav pull-right"
             li
               = link_to(t('logout'), destroy_user_session_path, :method => :delete)
