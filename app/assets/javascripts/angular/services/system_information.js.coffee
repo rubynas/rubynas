@@ -1,3 +1,3 @@
-angular.module('system_information', ['ngResource']).
-  factory 'SystemInformation', ($resource) ->
+angular.module('system_information', ['ngResource'])
+  .factory 'SystemInformation', ($resource) ->
     $resource '/api/system/information'

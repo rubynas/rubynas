@@ -304,6 +304,7 @@ GEM
     virtus (0.5.4)
       backports (~> 2.6.1)
       descendants_tracker (~> 0.0.1)
+    vmstat (2.0.0)
     warden (1.2.1)
       rack (>= 1.0)
     websocket (1.0.7)
@@ -353,3 +354,4 @@ DEPENDENCIES
   therubyracer
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
+  vmstat

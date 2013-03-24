@@ -4,4 +4,9 @@ class SystemInformationAPI < Grape::API
   get '/system/information' do
     present boot_time: Sys::Uptime.boot_time.to_s
   end
+  
+  desc 'resturns vmstat data'
+  get '/system/vmstat' do
+    present Vmstat.snapshot
+  end
 end
