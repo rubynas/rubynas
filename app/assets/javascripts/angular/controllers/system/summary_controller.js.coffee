@@ -32,6 +32,9 @@ window.SystemSummaryController = ($scope, $http) ->
       used = (memory.wired + memory.active + memory.inactive) * memory.pagesize
       $scope.memory =
         used: (used / (free + used) * 100.0) + '%'
+        
+      # Create nics
+      $scope.nics = vmstat.network_interfaces
   
   # update after load
   updateVmstat()

@@ -1,7 +1,7 @@
 angular.module('rubynas', [
   'layout', 'httpError'
   'user', 'group', 'volume'
-  'timeago'
+  'timeago', 'bytes'
 ]).config ($routeProvider, $locationProvider, $httpProvider) ->
   # Show backend http errors
   $httpProvider.responseInterceptors.push('httpErrorInterceptor')
