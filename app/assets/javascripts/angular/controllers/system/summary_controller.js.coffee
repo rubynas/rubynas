@@ -1,4 +1,6 @@
-window.SystemSummaryController = ($scope, $http) ->
+window.SystemSummaryController = ($scope, $http, User) ->
+  $scope.users = User.query()
+  
   # Map all cpus to a single value
   mapCpus = (cpus) ->
     data =
