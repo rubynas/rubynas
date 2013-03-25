@@ -1,17 +1,23 @@
-angular.module('bytes', []).
-  filter 'bytes', () ->
+angular.module('bytes', [])
+  .filter 'bytes', () ->
     UNIT = 1000
     KB = UNIT
     MB = KB * UNIT
     GB = MB * UNIT
     TB = GB * UNIT
     
+    formatFloat = (val) ->
+      Math.ceil(val * 100) / 100
+        
     (bytes) ->
       if bytes <= MB
-        "#{Math.ceil(bytes / KB)} KB"
+        "#{formatFloat(bytes / KB)} KB"
       else if bytes <= GB
-        "#{Math.ceil(bytes / MB)} MB"
+        "#{formatFloat(bytes / MB)} MB"
       else if bytes <= TB
-        "#{Math.ceil(bytes / GB)} GB"
+        "#{formatFloat(bytes / GB)} GB"
       else
-        "#{Math.ceil(bytes / TB)} TB"
+        "#{formatFloat(bytes / TB)} TB"
+  .filter 'number', () ->
+    (val) ->
+      Math.ceil(val * 100) / 100

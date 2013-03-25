@@ -9,11 +9,9 @@ layout title="System Summary"
             = "{{boot_time | timeago}}"
       .span12
         ul.thumbnails
-          li = holder_tag '200x200', 'Activity'
-          li = holder_tag '200x200', 'Storage'
           li
             .vmstat
-              | Network
+              strong Network
               table class="table table-striped"
                 thead
                   tr
@@ -27,21 +25,45 @@ layout title="System Summary"
                     td {{nic.out_bytes | bytes}}
           li
             .vmstat
-              | Users
+              strong Storage
+              div ng-repeat="disk in disks"
+                | {{disk.origin}}
+                .progress
+                  div class="bar bar-success" style="width: {{(disk.total_blocks - disk.free_blocks) / disk.total_blocks * 100}}%;"
+                    | {{((disk.total_blocks - disk.free_blocks) * disk.block_size) | bytes}}
+              
+          li
+            .vmstat
+              strong Users
               ul
                 li ng-repeat='user in users'
                   | {{user.common_name}}
-          li = holder_tag '200x200', 'Services'
           li
             .vmstat
-              | CPU
+              strong CPU
               .progress
                 div class="bar bar-danger" style="width: {{cpu.system}};"
                 div class="bar bar-success" style="width: {{cpu.user}};"
 
-              | Memory
+              strong Memory
               .progress
-                div class="bar bar-success" style="width: {{memory.used}};"
+                div class="bar bar-success" style="width: {{memory.usedPercent}};"
+                  | {{memory.usedBytes | bytes}}
+          li
+            .vmstat
+              strong Load:
+              div
+                | 5min
+                .progress
+                  div class="bar bar-success" style="width: {{load.one_minute / cpus * 100}}%;"
+                | 10min
+                .progress
+                  div class="bar bar-success" style="width: {{load.five_minutes / cpus * 100}}%;"
+                | 15min
+                .progress
+                  div class="bar bar-success" style="width: {{load.fifteen_minutes / cpus * 100}}%;"
+          li = holder_tag '200x200', 'Activity'
+          li = holder_tag '200x200', 'Services'
     #push
 #footer
   .container

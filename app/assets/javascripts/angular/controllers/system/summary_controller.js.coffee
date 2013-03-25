@@ -22,18 +22,26 @@ window.SystemSummaryController = ($scope, $http, User) ->
   
   updateVmstat = () ->
     $http.get('/api/system/vmstat').success (vmstat) ->
+      # load
+      $scope.load = vmstat.load_average
+      
+      # disks
+      $scope.disks = vmstat.disks
+      
       # boottime
-      $scope.boot_time = vmstat.boot_time;
+      $scope.boot_time = vmstat.boot_time
       
       # Create cpu progress bar
       $scope.cpu = mapCpus(vmstat.cpus)
+      $scope.cpus = vmstat.cpus.length
       
       # Create memory progress bar
       memory = vmstat.memory
       free = memory.free * memory.pagesize
       used = (memory.wired + memory.active + memory.inactive) * memory.pagesize
       $scope.memory =
-        used: (used / (free + used) * 100.0) + '%'
+        usedPercent: (used / (free + used) * 100.0) + '%'
+        usedBytes: used
         
       # Create nics
       $scope.nics = vmstat.network_interfaces
