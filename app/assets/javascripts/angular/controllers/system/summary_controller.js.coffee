@@ -1,6 +1,4 @@
-window.SystemSummaryController = ($scope, SystemInformation, $http) ->
-  $scope.system_information = SystemInformation.get()
-  
+window.SystemSummaryController = ($scope, $http) ->
   # Map all cpus to a single value
   mapCpus = (cpus) ->
     data =
@@ -22,6 +20,9 @@ window.SystemSummaryController = ($scope, SystemInformation, $http) ->
   
   updateVmstat = () ->
     $http.get('/api/system/vmstat').success (vmstat) ->
+      # boottime
+      $scope.boot_time = vmstat.boot_time;
+      
       # Create cpu progress bar
       $scope.cpu = mapCpus(vmstat.cpus)
       

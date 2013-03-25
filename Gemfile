@@ -71,7 +71,6 @@ gem 'lumberjack_syslog_device'
 gem 'activeldap', '~> 3.2.2', :require => 'active_ldap'
 
 # System information
-gem 'sys-uptime', :require => 'sys/uptime'
 gem 'vmstat'
 
 # To use ActiveModel has_secure_password
