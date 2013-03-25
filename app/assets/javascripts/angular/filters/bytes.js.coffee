@@ -1,6 +1,6 @@
 angular.module('bytes', [])
   .filter 'bytes', () ->
-    UNIT = 1000
+    UNIT = 1024
     KB = UNIT
     MB = KB * UNIT
     GB = MB * UNIT

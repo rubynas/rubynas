@@ -27,7 +27,7 @@ layout title="System Summary"
             .vmstat
               strong Storage
               div ng-repeat="disk in disks"
-                | {{disk.origin}}
+                | {{disk.origin}} ({{(disk.total_blocks * disk.block_size) | bytes}})
                 .progress
                   div class="bar bar-success" style="width: {{(disk.total_blocks - disk.free_blocks) / disk.total_blocks * 100}}%;"
                     | {{((disk.total_blocks - disk.free_blocks) * disk.block_size) | bytes}}
@@ -45,7 +45,7 @@ layout title="System Summary"
                 div class="bar bar-danger" style="width: {{cpu.system}};"
                 div class="bar bar-success" style="width: {{cpu.user}};"
 
-              strong Memory
+              strong Memory ({{memory.totalBytes | bytes}})
               .progress
                 div class="bar bar-success" style="width: {{memory.usedPercent}};"
                   | {{memory.usedBytes | bytes}}

@@ -42,6 +42,7 @@ window.SystemSummaryController = ($scope, $http, User) ->
       $scope.memory =
         usedPercent: (used / (free + used) * 100.0) + '%'
         usedBytes: used
+        totalBytes: free + used
         
       # Create nics
       $scope.nics = vmstat.network_interfaces
