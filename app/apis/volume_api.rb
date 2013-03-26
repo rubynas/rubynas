@@ -11,10 +11,24 @@ class VolumeAPI < Grape::API
   
   resource :volumes do
     desc "Returns the list of volumes", {
-      :object_fields => VolumeAPI::Volume.documentation
+      :object_fields => ::VolumeAPI::Volume.documentation
     }
     get '/' do
-      present ::Volume.all, with: VolumeAPI::Volume
+      present ::Volume.all, with: ::VolumeAPI::Volume
+    end
+    
+    desc "Return the requested volume", {
+      :object_fields => ::VolumeAPI::Volume.documentation
+    }
+    params do
+      requires :id, type: Fixnum
+    end
+    get '/:id' do
+      begin
+        present ::Volume.find(params[:id]), with: ::VolumeAPI::Volume
+      rescue ActiveRecord::RecordNotFound => ex
+        throw :error, :status => 404, :messages => ex.message
+      end
     end
   end
 end

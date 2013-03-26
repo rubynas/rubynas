@@ -7,14 +7,21 @@ describe SystemInformationAPI do
     described_class
   end
   
-  describe "GET /system/information" do
+  describe "GET /system/vmstat" do
     before do
-      Sys::Uptime.stub(:boot_time).and_return(Time.gm(2000))
-      get '/system/information' 
+      get '/system/vmstat'
     end
     subject { last_response }
     
     it { should be_ok }
-    its(:body) { should include(Time.gm(2000).to_s) }
+  end
+  
+  describe "GET /system/disk/" do
+    before do
+      get '/system/disk/' 
+    end
+    subject { last_response }
+    
+    it { should be_ok }
   end
 end

@@ -29,5 +29,8 @@ angular.module('rubynas', [
     .when "/volumes",
       controller: VolumeListController,
       templateUrl: "/assets/volumes/index.html"
+    .when "/volumes/:id",
+      controller: VolumeController,
+      templateUrl: "/assets/volumes/form.html"
     .otherwise
       redirectTo: '/system/summary'
