@@ -73,4 +73,26 @@ describe 'Restful Volume API' do
     its(:status) { should == 201 }
     specify { Volume.where(name: "Foo").should have(1).item }
   end
+  
+  context "DELETE /volumes/:id" do
+    context "with volume" do
+      before do
+        create :root_volume
+        delete '/volumes/1'
+      end
+      subject { last_response }
+    
+      it { should be_ok }
+      specify { Volume.all.should be_empty }
+    end
+    
+    context "without volume" do
+      before do
+        delete '/volumes/123123'
+      end
+      subject { last_response }
+    
+      its(:status) { should == 404 }
+    end
+  end
 end

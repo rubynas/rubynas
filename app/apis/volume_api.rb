@@ -41,9 +41,20 @@ class VolumeAPI < Grape::API
       end
     end
     
-    desc ""
+    desc "Create new volume", {
+      :object_fields => ::VolumeAPI::Volume.documentation
+    }
     post "/" do
       ::Volume.create name: params[:name], path: params[:path]
+    end
+    
+    desc "Delete a volume"
+    delete '/:id' do
+      begin
+        ::Volume.find(params.delete(:id)).destroy
+      rescue ActiveRecord::RecordNotFound => ex
+        throw :error, :status => 404, :messages => ex.message
+      end
     end
   end
 end

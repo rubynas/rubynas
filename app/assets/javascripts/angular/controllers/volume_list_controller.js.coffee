@@ -1,9 +1,9 @@
-window.VolumeListController = ($scope, $location, $routeParams, $http, Volume) ->
+window.VolumeListController = ($scope, $location, $routeParams, Volume) ->
   $scope.volumes = Volume.query()
   
   $scope.remove = (id) ->
-    User.delete(id: id)
-    $scope.users = User.query()
+    Volume.delete(id: id)
+    $scope.volumes = Volume.query()
 
   $scope.edit = (id) ->
     $location.path("/volumes/" + id)
