@@ -1,5 +1,8 @@
-window.SystemSummaryController = ($scope, $http, User) ->
+window.SystemSummaryController = ($scope, $http, User, Volume) ->
   $scope.users = User.query()
+
+  # disks
+  $scope.disks = Volume.query()
   
   # Map all cpus to a single value
   mapCpus = (cpus) ->
@@ -24,9 +27,6 @@ window.SystemSummaryController = ($scope, $http, User) ->
     $http.get('/api/system/vmstat').success (vmstat) ->
       # load
       $scope.load = vmstat.load_average
-      
-      # disks
-      $scope.disks = vmstat.disks
       
       # boottime
       $scope.boot_time = vmstat.boot_time
