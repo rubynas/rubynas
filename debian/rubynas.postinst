@@ -30,11 +30,10 @@ case "$1" in
     fi
     
     cd $APP_DIR # within the app dir
-        # Create secret session token
-        ruby1.9.3 -S rake secret:file
-
-        # Create database file or migrate database
-        ruby1.9.3 -S rake db:migrate
+        # 1 - Create secret session token
+        # 2 - Create database file or migrate database
+        # 3 - Create application related basic information (user, group, volume)
+        ruby1.9.3 -S rake secret:file db:migrate app:setup
     cd -
     
 	  # Create application upstart scripts
