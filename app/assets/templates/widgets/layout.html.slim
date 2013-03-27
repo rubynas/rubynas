@@ -13,54 +13,51 @@
           ul class="nav"
             li
               a href="/system/summary" Dashboard
-            li
-              div class="btn-group"
-                a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
-                  | System 
-                  span class="caret"
-                ul class="dropdown-menu"
-                  li
-                    a ng-click="open('users')" href="#"
-                      | Users
-                  li
-                    a ng-click="open('groups')" href="#"
-                      | Groups
-                  li
-                    a ng-click="open('volumes')" href="#"
-                      | Volumes
-                  li
-                    a href="#"
-                      | Shares
-            li
-              div class="btn-group"
-                a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
-                  | Services 
-                  span class="caret"
-                ul class="dropdown-menu"
-                  li
-                    a href="#"
-                      | ZFS
-                  li
-                    a href="#"
-                      | AFP
-                  li
-                    a href="#"
-                      | Samba
-                  li
-                    a href="#"
-                      | Monitoring
-            li
-              div class="btn-group"
-                a class="btn dropdown-toggle" data-toggle="dropdown" href="#"
-                  | Apps 
-                  span class="caret"
-                ul class="dropdown-menu"
-                  li
-                    a href="#"
-                      | Redmine?
-                  li
-                    a href="#"
-                      | Gitosis?
+            li class="dropdown"
+              a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                | System 
+                span class="caret"
+              ul class="dropdown-menu"
+                li
+                  a ng-click="open('users')" href="#"
+                    | Users
+                li
+                  a ng-click="open('groups')" href="#"
+                    | Groups
+                li
+                  a ng-click="open('volumes')" href="#"
+                    | Volumes
+                li
+                  a href="#"
+                    | Shares
+            li class="dropdown"
+              a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                | Services 
+                span class="caret"
+              ul class="dropdown-menu"
+                li
+                  a href="#"
+                    | ZFS
+                li
+                  a href="#"
+                    | AFP
+                li
+                  a href="#"
+                    | Samba
+                li
+                  a href="#"
+                    | Monitoring
+            li class="dropdown"
+              a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                | Apps 
+                span class="caret"
+              ul class="dropdown-menu"
+                li
+                  a href="#"
+                    | Redmine?
+                li
+                  a href="#"
+                    | Gitosis?
           ul class="nav pull-right"
             li
               = link_to(t('logout'), destroy_user_session_path, :method => :delete)
