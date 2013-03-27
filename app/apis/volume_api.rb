@@ -30,5 +30,20 @@ class VolumeAPI < Grape::API
         throw :error, :status => 404, :messages => ex.message
       end
     end
+    
+    desc "Update the volume with the passed id"
+    put '/:id' do
+      begin
+        data = { name: params[:name], path: params[:path] }
+        ::Volume.find(params.delete(:id)).update_attributes!(data)
+      rescue ActiveRecord::RecordNotFound => ex
+        throw :error, :status => 404, :messages => ex.message
+      end
+    end
+    
+    desc ""
+    post "/" do
+      ::Volume.create name: params[:name], path: params[:path]
+    end
   end
 end
