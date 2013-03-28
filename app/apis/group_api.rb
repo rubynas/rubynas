@@ -1,5 +1,9 @@
 class GroupAPI < Grape::API
   format :json
+
+  rescue_from ActiveLdap::EntryNotFound do |e|
+    Rack::Response.new([e.inspect], 404)
+  end
   
   class Group < Grape::Entity
     expose :common_name, :documentation => { :type => String, :desc => "Group name" }
@@ -16,21 +20,13 @@ class GroupAPI < Grape::API
     
     desc "Return a single group"
     get '/:cn' do
-      begin
-        present LdapGroup.find(params[:cn]), with: GroupAPI::Group
-      rescue ActiveLdap::EntryNotFound
-        throw :error, :status => 404
-      end
+      present LdapGroup.find(params[:cn]), with: GroupAPI::Group
     end
     
     desc "Delete the passed group"
     delete '/:cn' do
-      begin
-        LdapGroup.find(params[:cn]).destroy
-        ""
-      rescue ActiveLdap::EntryNotFound
-        throw :error, :status => 404
-      end
+      LdapGroup.find(params.delete(:cn)).destroy
+      ""
     end
     
     desc "Add a new group"
@@ -49,12 +45,8 @@ class GroupAPI < Grape::API
       requires :gid_number, type: Fixnum
     end
     put '/:cn' do
-      begin
-        LdapGroup.find(params.delete(:cn)).update_attributes(params)
-        ""
-      rescue ActiveLdap::EntryNotFound
-        throw :error, :status => 404
-      end
+      LdapGroup.find(params.delete(:cn)).update_attributes(params)
+      ""
     end
   end
 end

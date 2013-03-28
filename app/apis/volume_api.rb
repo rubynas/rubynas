@@ -1,5 +1,9 @@
 class VolumeAPI < Grape::API
   format :json
+
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    Rack::Response.new([e.inspect], 404)
+  end
   
   class Volume < Grape::Entity
     expose :id, :documentation => { :type => String, :desc => "volume unique id" }
@@ -24,21 +28,13 @@ class VolumeAPI < Grape::API
       requires :id, type: Fixnum
     end
     get '/:id' do
-      begin
-        present ::Volume.find(params[:id]), with: ::VolumeAPI::Volume
-      rescue ActiveRecord::RecordNotFound => ex
-        throw :error, :status => 404, :messages => ex.message
-      end
+      present ::Volume.find(params[:id]), with: ::VolumeAPI::Volume
     end
     
     desc "Update the volume with the passed id"
     put '/:id' do
-      begin
-        data = { name: params[:name], path: params[:path] }
-        ::Volume.find(params.delete(:id)).update_attributes!(data)
-      rescue ActiveRecord::RecordNotFound => ex
-        throw :error, :status => 404, :messages => ex.message
-      end
+      data = { name: params[:name], path: params[:path] }
+      ::Volume.find(params.delete(:id)).update_attributes!(data)
     end
     
     desc "Create new volume", {
@@ -50,11 +46,7 @@ class VolumeAPI < Grape::API
     
     desc "Delete a volume"
     delete '/:id' do
-      begin
-        ::Volume.find(params.delete(:id)).destroy
-      rescue ActiveRecord::RecordNotFound => ex
-        throw :error, :status => 404, :messages => ex.message
-      end
+      ::Volume.find(params.delete(:id)).destroy
     end
   end
 end
