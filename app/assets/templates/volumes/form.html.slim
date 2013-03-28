@@ -4,19 +4,19 @@ layout title="Volume"
       .span10
         h3 General
     .row
-      .control-volume
+      .control-group
         label.control-label for="name"
           | Name
         div.controls
           input type="text" id="name" ng-model="volume.name" required="required"
-      .control-volume
+      .control-group
         label.control-label for="path"
           | Path
         div.controls
           input type="text" id="path" ng-model="volume.path" required="required"
     .row
       .span10
-        .control-volume
+        .control-group
           div.controls
             button class="btn" type="submit" ng-disabled="volumeForm.$invalid"
       				| Save
