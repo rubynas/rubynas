@@ -21,5 +21,4 @@ angular.module('httpError', [])
         $modal = $digest.find('.http-error.modal').modal()
         $iframe = $modal.find('iframe')
         $iframe[0].contentDocument.write(response.data)
-          
     templateUrl: "/assets/widgets/http_error.html"
