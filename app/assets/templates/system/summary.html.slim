@@ -38,7 +38,7 @@ layout title="System Summary"
                   div class="bar bar-success" style="width: {{load.fifteen_minutes / cpus * 100}}%;"
           li
             .vmstat
-              strong Storage
+              strong Volumes
               div ng-repeat="disk in disks"
                 | {{disk.name}} ({{disk.capacity | bytes}})
                 .progress
