@@ -32,5 +32,11 @@ angular.module('rubynas', [
     .when "/volumes/:id",
       controller: VolumeController,
       templateUrl: "/assets/volumes/form.html"
+    .when "/shared_folders",
+      controller: SharedFolderListController,
+      templateUrl: "/assets/shared_folders/index.html"
+    .when "/shared_folders/:id",
+      controller: SharedFolderController,
+      templateUrl: "/assets/shared_folders/form.html"
     .otherwise
       redirectTo: '/system/summary'

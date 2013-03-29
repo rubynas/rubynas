@@ -1,0 +1,76 @@
+layout title="Shared Folder"
+  form.form-horizontal name="sharedFolderForm" ng-submit="save()"
+    .row
+      .span12
+        h4 General
+    .row
+      .span12
+        .control-group
+          label.control-label for="path"
+            | Path
+          .controls
+            input.input-xxlarge type="text" id="path" ng-model="sharedFolder.path" required="required"
+            span ng-show="sharedFolderForm.$invalid" class="help-inline" Something may have gone wrong
+    .row
+      .span6
+        .control-group
+          label.control-label
+            | Exposed via
+          .controls
+            label.checkbox.inline ng-repeat="service in sharedFolder.exposed_via_services" for="{{service.id}}"
+              | {{service.id | uppercase}}
+              input type="checkbox" id="{{service.id}}" value="{{service.id}}" checked="{{service.enabled}}"
+      .span6
+        .control-group
+          label.control-label
+            | Capabilities
+          .controls
+            label.checkbox.inline ng-repeat="capability in sharedFolder.capabilities" for="{{capability.id}}"
+              | {{capability.id}}
+              input type="checkbox" id="{{capability.id}}" value="{{capability.id}}" checked="{{capability.enabled}}"
+    .row
+      .span12
+        h4 Access Rights
+        table.table.table-striped.table-condensed
+          thead
+            tr
+              td User or Group
+              td Rights
+              td
+          tbody
+            tr ng-repeat='user in sharedFolder.users'
+              td.span8
+                | {{user.common_name}}
+              td.span2
+                select
+                  option Read & Write
+                  option Read only
+                  option None
+              td.span2
+                a class="btn btn-danger pull-right" ng-click="remove(user.common_name)"
+                  | Remove
+            tr
+              td
+                select.input-xlarge
+                  option Please select a User or Group
+                  optgroup label="Users"
+                    option Paul
+                    option Pete
+                  optgroup label="Groups"
+                    option Administrators
+                    option Users
+              td.span2
+                select
+                  option Read & Write
+              td.span2
+                a class="btn btn-success pull-right" ng-click="addUser()"
+                  | Add User or Group
+    .row
+      .span12
+        .form-actions
+          button class="btn btn-primary" type="submit" ng-disabled="sharedFolderForm.$invalid"
+            | Save
+          |  
+          button class="btn" ng-click="cancel()"
+            | Cancel
+
