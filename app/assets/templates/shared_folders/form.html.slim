@@ -10,7 +10,7 @@ layout title="Shared Folder"
             | Path
           .controls
             input.input-xxlarge type="text" id="path" ng-model="sharedFolder.path" required="required"
-            span ng-show="sharedFolderForm.$invalid" class="help-inline" Something may have gone wrong
+            span ng-show="sharedFolderForm.$invalid" class="help-inline" Please enter a valid path
     .row
       .span6
         .control-group
@@ -19,7 +19,7 @@ layout title="Shared Folder"
           .controls
             label.checkbox.inline ng-repeat="service in sharedFolder.exposed_via_services" for="{{service.id}}"
               | {{service.id | uppercase}}
-              input type="checkbox" id="{{service.id}}" value="{{service.id}}" checked="{{service.enabled}}"
+              input type="checkbox" id="{{service.id}}" ng-model="service.enabled"
       .span6
         .control-group
           label.control-label
@@ -27,7 +27,7 @@ layout title="Shared Folder"
           .controls
             label.checkbox.inline ng-repeat="capability in sharedFolder.capabilities" for="{{capability.id}}"
               | {{capability.id}}
-              input type="checkbox" id="{{capability.id}}" value="{{capability.id}}" checked="{{capability.enabled}}"
+              input type="checkbox" id="{{capability.id}}" ng-model="capability.enabled"
     .row
       .span12
         h4 Access Rights
@@ -54,17 +54,17 @@ layout title="Shared Folder"
                 select.input-xlarge
                   option Please select a User or Group
                   optgroup label="Users"
-                    option Paul
-                    option Pete
+                    option ng-repeat='user in users'
+                      | {{user.common_name}}
                   optgroup label="Groups"
-                    option Administrators
-                    option Users
+                    option ng-repeat='group in groups'
+                      | {{group.common_name}}
               td.span2
                 select
                   option Read & Write
               td.span2
                 a class="btn btn-success pull-right" ng-click="addUser()"
-                  | Add User or Group
+                  | Add
     .row
       .span12
         .form-actions

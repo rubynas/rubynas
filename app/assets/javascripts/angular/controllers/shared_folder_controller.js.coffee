@@ -1,4 +1,6 @@
-window.SharedFolderController = ($scope, $routeParams, $location) ->
+window.SharedFolderController = ($scope, $routeParams, $location, Group, User) ->
+  $scope.users = User.query()
+  $scope.groups = Group.query()
   if $routeParams.id == 'new'
     $scope.sharedFolder = {}
   else
