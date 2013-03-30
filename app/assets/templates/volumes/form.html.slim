@@ -1,7 +1,7 @@
 layout title="Volume"
   form.form-horizontal name="volumeForm" ng-submit="save()"
     .row
-      .span10
+      .span12
         h3 General
     .row
       .control-group
@@ -15,7 +15,7 @@ layout title="Volume"
         div.controls
           input type="text" id="path" ng-model="volume.path" required="required"
     .row
-      .span10
+      .span12
         .form-actions
           button class="btn btn-primary" type="submit" ng-disabled="volumeForm.$invalid"
     				| Save

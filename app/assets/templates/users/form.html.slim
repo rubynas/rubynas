@@ -4,7 +4,7 @@ layout title="User"
       .span10
         h3 Basics
     .row
-      .span4
+      .span5
         .control-group
           label.control-label for="common_name"
             | CommonName
@@ -16,7 +16,7 @@ layout title="User"
           div.controls
             input type="text" id="mail" ng-model="user.mail" required="required"
       .span1
-      .span4
+      .span5
         .control-group
           label.control-label for="given_name"
             | Firstname
@@ -29,7 +29,7 @@ layout title="User"
             input type="text" id="surname" ng-model="user.surname" required="required"
       .span1
     .row
-      .span10
+      .span12
         h3 Account
     .row
       .span4
@@ -60,18 +60,18 @@ layout title="User"
       .span10
         h3 Password
     .row ng-hide="user.password == user.password_verify"
-      .span10
+      .span12
         p.alert
           | Password dosn't match!
     .row
-      .span4
+      .span5
         .control-group
           label.control-label for="password"
             | Password
           div.controls
             input type="password" id="password" ng-model="user.password" required="required"
       .span1
-      .span4
+      .span5
         .control-group
           label.control-label for="password_verify"
             | Verify
@@ -79,7 +79,7 @@ layout title="User"
             input type="password" id="password_verify" ng-model="user.password_verify" required="required"
       .span1
     .row
-      .span10
+      .span12
         .form-actions
           button class="btn btn-primary" type="submit" ng-disabled="userForm.$invalid || (user.password != user.password_verify)"
     				| Save
