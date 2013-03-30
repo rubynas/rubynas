@@ -80,7 +80,6 @@ layout title="User"
       .span1
     .row
       .span10
-        .control-group
-          div.controls
-            button class="btn" type="submit" ng-disabled="userForm.$invalid || (user.password != user.password_verify)"
-      				| Save
+        .form-actions
+          button class="btn btn-primary" type="submit" ng-disabled="userForm.$invalid || (user.password != user.password_verify)"
+    				| Save

@@ -16,7 +16,6 @@ layout title="Group"
           input type="text" id="gid_number" ng-model="group.gid_number" required="required"
     .row
       .span10
-        .control-group
-          div.controls
-            button class="btn" type="submit" ng-disabled="groupForm.$invalid"
-      				| Save
+        .form-actions
+          button class="btn btn-primary" type="submit" ng-disabled="groupForm.$invalid"
+    				| Save

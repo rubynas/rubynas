@@ -16,7 +16,6 @@ layout title="Volume"
           input type="text" id="path" ng-model="volume.path" required="required"
     .row
       .span10
-        .control-group
-          div.controls
-            button class="btn" type="submit" ng-disabled="volumeForm.$invalid"
-      				| Save
+        .form-actions
+          button class="btn btn-primary" type="submit" ng-disabled="volumeForm.$invalid"
+    				| Save
