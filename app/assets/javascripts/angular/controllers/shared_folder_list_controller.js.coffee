@@ -15,3 +15,4 @@ window.SharedFolderListController = ($scope, $location) ->
     
   $scope.addNew = () ->
     $location.path("/shared_folders/new")
+    
