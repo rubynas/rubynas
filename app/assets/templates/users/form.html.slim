@@ -32,7 +32,7 @@ layout title="User"
       .span12
         h3 Account
     .row
-      .span4
+      .span5
         .control-group
           label.control-label for="uid"
             | Login
@@ -43,8 +43,13 @@ layout title="User"
             | Home Directory
           div.controls
             input type="text" id="home_directory" ng-model="user.home_directory" required="required"
+        .control-group
+          label.control-label for="login_shell"
+            | Login Shell
+          div.controls
+            select id="login_shell" ng-model="user.login_shell" required="required" ng-options="shell.path as shell.name for shell in shells"
       .span1
-      .span4
+      .span5
         .control-group
           label.control-label for="uid_number"
             | User ID

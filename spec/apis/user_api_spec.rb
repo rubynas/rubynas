@@ -57,7 +57,8 @@ describe 'Restful User API' do
                      :given_name => "John",
                      :surname => "Doe",
                      :mail => "john.doe@rubynas.com",
-                     :password => 'password'
+                     :password => 'password',
+                     :login_shell => '/bin/bash'
       last_response.status.should == 201
       user = LdapUser.find('John Doe')
       user.should be_a(LdapUser)

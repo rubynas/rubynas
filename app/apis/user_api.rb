@@ -10,6 +10,7 @@ class UserAPI < Grape::API
     expose :gid_number, :documentation => { :type => Integer, :desc => "ID of the group" }
     expose :uid_number, :documentation => { :type => Integer, :desc => "ID of the user" }
     expose :mail, :documentation => { :type => String, :desc => "E-Mail address" }
+    expose :login_shell, :documentation => { :type => String, :desc => "The shell used for ssh login" }
   end
   
   resource :users do
@@ -42,6 +43,7 @@ class UserAPI < Grape::API
       requires :uid_number
       requires :password
       requires :mail
+      requires :login_shell
     end
     post '/' do
       password = ActiveLdap::UserPassword.sha(params.delete(:password))

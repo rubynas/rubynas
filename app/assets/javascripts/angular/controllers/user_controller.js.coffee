@@ -5,6 +5,13 @@ window.UserController = ($scope, $location, $routeParams, User, Group) ->
   else
     $scope.user = User.get(cn: $routeParams.cn)
   
+  # Available shells
+  $scope.shells = [
+    { path: "/bin/sh",    name: "Shell" },
+    { path: "/bin/bash",  name: "BASH" },
+    { path: "/bin/false", name: "No Login" }
+  ]
+  
   # Create default values for all other fields based on the entered common name.
   $scope.createDefaults = () ->
     if $scope.user.common_name?
