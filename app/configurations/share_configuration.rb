@@ -1,0 +1,3 @@
+class ShareConfiguration < Configuration
+
+end

@@ -11,7 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130322143040) do
+ActiveRecord::Schema.define(:version => 20130331103034) do
+
+  create_table "shared_folder_services", :force => true do |t|
+    t.integer  "shared_folder_id"
+    t.string   "service_class"
+    t.text     "options"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  create_table "shared_folders", :force => true do |t|
+    t.string   "name"
+    t.string   "path"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
