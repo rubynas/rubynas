@@ -1,6 +1,6 @@
 class SharedFolder < ActiveRecord::Base
   attr_accessible :name, :path
-  
+  has_many :shared_folder_services
   validates_presence_of :name, :path
   
   validate :path_exists
