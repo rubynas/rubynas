@@ -29,7 +29,7 @@ group :test, :development do
   gem 'cane'
   gem 'brakeman'
   gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'poltergeist'
   gem 'capistrano'
   
   # Guard deps.
