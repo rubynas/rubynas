@@ -2,8 +2,21 @@ class AfpShareConfiguration < Configuration
   config_file 'afp.conf'
 
   def render
-    @shares = load_shares
-    template.result binding
+    NetatalkConfig.clear
+    config.each do |share_name, share_config|
+      NetatalkConfig.shares[share_name] = share_config
+    end
+    NetatalkConfig.afp
+  end
+
+  def config
+    load_shares.inject({}) do |config, share|
+      config[share.shared_folder.name] = {
+        'path' => share.shared_folder.path,
+        'time_machine' => (share.options[:time_machine] == true)
+      }
+      config
+    end
   end
 
 private
@@ -11,16 +24,4 @@ private
   def load_shares
     SharedFolderService.where(service_class: 'AfpShareService')
   end
-
-  def template
-    ERB.new File.read(__FILE__).split("__END__\n").last
-  end
 end
-
-__END__
-
-<% @shares.each do |share| %>
-[<%= share.shared_folder.name %>]
-  path = <%= share.shared_folder.path %>
-  time machine = <%= share.options[:time_machine] == true ? 'yes' : 'no' %>
-<% end %>

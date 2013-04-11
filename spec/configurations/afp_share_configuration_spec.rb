@@ -13,7 +13,7 @@ describe AfpShareConfiguration do
 
   context 'no shares' do
     before { config.stub('load_shares').and_return([]) }
-    its('render') { should match(/\A\s*\z/) }
+    its('config') { should be_empty }
   end
 
   context 'shares' do
@@ -29,7 +29,10 @@ describe AfpShareConfiguration do
     end
     before { config.stub('load_shares') { [ share_a, share_b ] } }
 
-    its('render') { should include("[System]\n  path = /\n  time machine = yes\n\n"\
-                                   "[Bar]\n  path = /bar\n  time machine = no" ) }
+    its('config') { should_not be_empty }
+    its('config') do
+      should == {'Bar' => { 'path' => '/bar', 'time_machine' => false },
+                 'System' => {'path'=>'/', 'time_machine' => false } }
+    end
   end
 end

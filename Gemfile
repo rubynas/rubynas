@@ -46,6 +46,9 @@ end
 gem 'devise'
 gem 'devise_ldap_authenticatable'
 
+# AFP / Netatalk
+gem 'netatalk-config'
+
 # Frontend
 gem 'jquery-rails'
 gem 'twitter-bootstrap-rails'
