@@ -3,6 +3,11 @@ class MainController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    render file: Rails.root.join('public', 'index.html')
+    admin_app = Rails.root.join('public', 'index.html')
+    if File.exists? admin_app
+      render file: admin_app
+    else
+      render text: "Cannot find #{admin_app}, please run 'git submodule update --init'"
+    end
   end
 end
