@@ -1,4 +1,5 @@
 app           				opt/rubynas
+admin         				opt/rubynas
 config        				opt/rubynas
 db/migrate    				opt/rubynas/db
 db/*.rb       				opt/rubynas/db
