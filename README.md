@@ -1,6 +1,6 @@
 # rubynas
 
-## Getting started
+## Getting Started
 
 To start developing simply start foreman:
 

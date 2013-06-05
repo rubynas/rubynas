@@ -29,7 +29,7 @@ group :test, :development do
   gem 'cane'
   gem 'brakeman'
   gem 'capybara'
-  gem 'capybara-webkit'
+  gem 'poltergeist'
   gem 'capistrano'
   
   # Guard deps.
@@ -45,6 +45,9 @@ end
 # LDAP Management
 gem 'devise'
 gem 'devise_ldap_authenticatable'
+
+# AFP / Netatalk
+gem 'netatalk-config'
 
 # Frontend
 gem 'jquery-rails'

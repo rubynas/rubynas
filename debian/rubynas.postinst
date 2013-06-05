@@ -46,7 +46,7 @@ case "$1" in
                                 -d $APP_DIR \
                                 upstart /etc/init
 	
-    # Link the rubynas website to the enabled sites and remote the defualt page
+    # Link the rubynas website to the enabled sites and remote the default page
     ln -nfs /etc/nginx/sites-available/rubynas /etc/nginx/sites-enabled/rubynas
     rm -f /etc/nginx/sites-enabled/default 2>&1 > /dev/null
     
