@@ -18,8 +18,8 @@ describe SharedFolderService do
     context "after loading" do
       before { subject.reload }
       
-      its(:service_class) { should == AfpShareService }
-      its(:options) { should include(time_machine: true) }
+      pending(:service_class) { should == AfpShareService }
+      pending(:options) { should include(time_machine: true) }
     end
   end
 end

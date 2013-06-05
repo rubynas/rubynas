@@ -142,3 +142,20 @@ And here is the template for the configuration above:
 ## Magic
 
 The magic behind scenes is basically done by the superclasses. They know how to start the a service and where the configuration files are placed. Main part of that magic is the automatic system and configuration detection. This is described in the section OS.
+
+# Config service (idea)
+
+The configuration needs administrative access to the system. Because every system has a different way to manage processes and a different way to configure this processes, this part is moved to a different project to keep the core clean from system and os details. This examples illustrates a possible restful interface
+
+    GET http://service.local/services
+      => each service with status
+    POST http://service.local/services/netatalk/start
+      => 200 started, 403 already started
+    POST http://service.local/services/netatalk/restart
+      => 200 restarted
+    POST http://service.local/services/netatalk/stop
+      => 200 stopped, 403 already stopped
+    GET http://service.local/services/netatalk
+      => Status
+    PUT http://service.local/services/netatalk/config
+      => 200 updated, 302 not updated

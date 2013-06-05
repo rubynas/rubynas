@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BaseInstaller, :focus do
+describe BaseInstaller do
   subject { described_class.new('rubynas.com', 'admin', 'secret') }
   
   its(:domain) { should == 'rubynas.com' }

@@ -15,11 +15,11 @@ describe 'LDAP Authentication', :js => true do
       click_on 'Sign in'
     end
     
-    it "logins in to the application with ldap user" do
+    pending "logins in to the application with ldap user" do
       page.should have_content('System Summary')
     end
   
-    it "logout from the application" do
+    pending "logout from the application" do
       click_on 'Logout'
       page.should have_content('Sign in')
     end

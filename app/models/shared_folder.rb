@@ -18,4 +18,15 @@ class SharedFolder < ActiveRecord::Base
       errors.add(:path, "Path isn't a directory") unless pathname.directory?
     end
   end
+  
+  # Searches for the shared folder service that is identified by the given
+  # service class.
+  # @param [Class, String] service_class a klass like AfpShareService
+  # @return [SharedFolderService, nil] the service configuration or nil if
+  #   no confiuration was found
+  def [](service_class)
+    if service = shared_folder_services.where(service_class: service_class).first
+      service.options
+    end
+  end
 end

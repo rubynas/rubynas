@@ -29,10 +29,36 @@ describe AfpShareConfiguration do
     end
     before { config.stub('load_shares') { [ share_a, share_b ] } }
 
-    its('config') { should_not be_empty }
-    its('config') do
-      should == {'Bar' => { 'path' => '/bar', 'time_machine' => false },
-                 'System' => {'path'=>'/', 'time_machine' => false } }
+    pending('config') { should_not be_empty }
+    pending('config') do
+      should == {
+        'Bar' => { 'path' => '/bar', 'time_machine' => false },
+        'System' => {'path'=>'/', 'time_machine' => false }
+      }
+    end
+  end
+  
+  context "#config" do
+    let!(:shared_folder) { create(:shared_folder_with_services) }
+    
+    pending "renders the configuration" do
+      subject.config.should == <<-CONF
+        ; Netatalk 3.x configuration file
+        ;
+
+        [Global]
+        ; log level = default:maxdebug
+        log file = /var/log/netatalk
+        uam list = uams_dhx.so uams_dhx2.so
+
+        [Homes]
+        basedir regex = /home
+
+        [System]
+        path = /
+        time machine = yes
+        }
+      CONF
     end
   end
 end

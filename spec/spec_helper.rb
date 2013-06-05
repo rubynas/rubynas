@@ -29,6 +29,11 @@ RSpec.configure do |config|
   # automatically. This will be the default behavior in future versions of
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
+  
+  # In RSpec 3, these symbols will be treated as metadata keys with
+  # a value of `true`.  To get this behavior now (and prevent this
+  # warning), you can set a configuration option:
+  config.treat_symbols_as_metadata_keys_with_true_values = true
 
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
