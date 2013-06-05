@@ -1,0 +1,2 @@
+class UbuntuInstaller < DebianInstaller
+end
