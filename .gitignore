@@ -20,4 +20,4 @@ sandbox/ldap/data/dc=rubynas,dc=com/
 
 .DS_Store
 .vagrant
-
+.ruby-gemset
