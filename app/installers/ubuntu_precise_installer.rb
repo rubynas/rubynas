@@ -1,2 +1,2 @@
-class UbuntuPrecise < UbuntuInstaller
+class UbuntuPreciseInstaller < UbuntuInstaller
 end

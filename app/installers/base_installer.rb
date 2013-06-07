@@ -48,4 +48,8 @@ class BaseInstaller
   def root?
     Process.uid == ROOT_USER_ID
   end
+  
+  def log(line)
+    puts line
+  end
 end

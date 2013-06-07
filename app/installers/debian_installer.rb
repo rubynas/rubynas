@@ -26,8 +26,9 @@ class DebianInstaller < BaseInstaller
     end
 
     IO.popen("#{sudo} debconf-set-selections", 'w') do |io|
-      io.write "'#{category}' '#{key}' '#{type}' '#{value}'"
+      io.write "'#{category}' '#{key}' #{type} '#{value}'"
     end
+    log "Configuring #{category} - #{key}"
     unless $?.exited?
       raise ConfigurationError, "Failed to configure #{category} (#{key})"
     end
@@ -44,7 +45,7 @@ class DebianInstaller < BaseInstaller
     debconf 'slapd', 'shared/organization', :string, @domain
     debconf 'slapd', 'slapd/no_configuration', :boolean, false
     debconf 'slapd', 'slapd/move_old_database', :boolean, true
-    debconf 'slapd', 'slapd/dump_database_destdir', :string
+    debconf 'slapd', 'slapd/dump_database_destdir', :string,
                      '/var/backups/slapd-VERSION'
     debconf 'slapd', 'slapd/purge_database', :boolean, true
     debconf 'slapd', 'slapd/domain', :string, @domain
