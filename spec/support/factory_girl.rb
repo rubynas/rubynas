@@ -1,3 +1,5 @@
+# encoding: utf-8
+require 'factory_girl'
 FactoryGirl.find_definitions
 
 RSpec.configure do |config|

@@ -19,7 +19,7 @@ describe SharedFolder do
     end
 
     context "no directory" do
-      subject { build :shared_folder, path: Rails.root.join("config/boot.rb") }
+      subject { build :shared_folder, path: "spec/spec_helper.rb" }
     
       its(:valid?) { should be_false }
     end
