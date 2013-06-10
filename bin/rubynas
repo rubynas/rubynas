@@ -4,8 +4,23 @@ $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 require 'rubynas'
 
 case ARGV.first
-when "migrate"
-  puts "Migration of the database"
+when 'migrate'
+  puts 'Migration of the database'
   path = File.expand_path('../../lib/rubynas/db/migrate', __FILE__)
   ActiveRecord::Migrator.migrate path
+when 'server'
+  require 'rack'
+  require 'puma'
+  require 'rack/handler/puma'
+
+  options = {
+    :Host => '0.0.0.0',
+    :Port => (ENV['PORT'] || 5100).to_s,
+    :Threads => '0:16',
+    :Verbose => false
+  }
+
+  Rack::Handler::Puma.run(Rubynas::Application, options) do |server|
+    [:INT, :TERM].each { |sig| trap(sig) { server.stop } }
+  end
 end
