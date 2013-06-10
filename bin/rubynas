@@ -7,5 +7,5 @@ case ARGV.first
 when "migrate"
   puts "Migration of the database"
   path = File.expand_path('../../lib/rubynas/db/migrate', __FILE__)
-  ActiveRecord::Migrator.migrate path, (ARGV[0] ? ARGV[0].to_i : nil)
+  ActiveRecord::Migrator.migrate path
 end

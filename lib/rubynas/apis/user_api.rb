@@ -12,6 +12,13 @@ class UserAPI < Grape::API
     expose :mail, :documentation => { :type => String, :desc => "E-Mail address" }
     expose :login_shell, :documentation => { :type => String, :desc => "The shell used for ssh login" }
   end
+  
+  rescue_from ActiveLdap::EntryNotFound do |error|
+    Rack::Response.new({
+      'status'  => 404,
+      'message' => error.message
+    }.to_json, 404)
+  end
 
   desc "Returns the list of users in the ldap", {
     :object_fields => UserAPI::User.documentation
@@ -30,7 +37,7 @@ class UserAPI < Grape::API
       gid_number: 1000,
       home_directory: "/home/" }
   end
-
+  
   desc "Adds new user to the ldap"
   params do
     requires :common_name
