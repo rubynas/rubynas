@@ -4,6 +4,7 @@ PATH
     rubynas (0.1.0)
       activeldap (~> 3.2.2)
       activerecord (= 3.2.13)
+      dnssd
       foreman
       grape
       grape-entity
@@ -57,6 +58,7 @@ GEM
     database_cleaner (1.0.1)
     descendants_tracker (0.0.1)
     diff-lcs (1.2.4)
+    dnssd (2.0)
     dotenv (0.7.0)
     erubis (2.7.0)
     factory_girl (4.2.0)
@@ -112,7 +114,7 @@ GEM
     method_source (0.8.1)
     multi_json (1.7.6)
     multi_xml (0.5.4)
-    net-ldap (0.2.2)
+    net-ldap (0.3.1)
     netatalk-config (0.0.2)
       rspec
     parallel (0.6.5)

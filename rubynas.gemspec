@@ -52,6 +52,7 @@ Gem::Specification.new do |spec|
 
   # Service management
   spec.add_runtime_dependency 'foreman'
+  spec.add_runtime_dependency 'dnssd'
   spec.add_runtime_dependency 'puma'
 
   # Middleware API
