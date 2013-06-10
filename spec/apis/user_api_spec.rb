@@ -9,11 +9,11 @@ describe 'Restful User API' do
   
   before { LdapUser.all.each(&:destroy) }
   
-  context "GET /users" do
+  context "GET /" do
     before do
       create :ldap_user
       create :admin_ldap_user
-      get '/users' 
+      get '/' 
     end
     subject { last_response }
     
@@ -23,9 +23,9 @@ describe 'Restful User API' do
     its(:body) { should_not include('userPassword') }
   end
   
-  context "GET /users/template" do
+  context "GET /template" do
     before do
-      get '/users/template'
+      get '/template'
     end
     subject { last_response }
 
@@ -36,7 +36,7 @@ describe 'Restful User API' do
     context "with one user" do
       before do
         create :ldap_user
-        get '/users/template' 
+        get '/template' 
       end
       subject { last_response }
 
@@ -47,9 +47,9 @@ describe 'Restful User API' do
     end
   end
 
-  context "POST /users" do
+  context "POST /" do
     it "creates a new user" do
-      post '/users', :common_name => 'John Doe',
+      post '/', :common_name => 'John Doe',
                      :uid => 'jdoe',
                      :home_directory => '/tmp',
                      :gid_number => 1000,
@@ -68,7 +68,7 @@ describe 'Restful User API' do
 
     it "doesn't create a new user if fields are missing" do
       LdapUser.should_not_receive(:create)
-      post '/users', :common_name => 'John Doe',
+      post '/', :common_name => 'John Doe',
                      :uid => 'jdoe',
                      :home_directory => '/tmp',
                      :gid_number => 1000,
@@ -80,7 +80,7 @@ describe 'Restful User API' do
   context "GET /user/cn" do
     it "searches with filter" do
       create :ldap_user
-      get '/users/User'
+      get '/User'
       last_response.should be_ok
     end
   end
@@ -88,7 +88,7 @@ describe 'Restful User API' do
   context "DELETE /user/cn" do
     it "searches with filter" do
       create :ldap_user
-      delete '/users/User'
+      delete '/User'
       last_response.status.should == 200
       expect { LdapUser.find("User") }.to raise_error(ActiveLdap::EntryNotFound)
     end
@@ -97,13 +97,13 @@ describe 'Restful User API' do
   context "PUT /user/cn" do
     it "updates the user" do
       create :ldap_user
-      put '/users/User', :uid_number => 2000
+      put '/User', :uid_number => 2000
       last_response.should be_ok
     end
 
     it "updates the user password" do
       create :ldap_user
-      put '/users/User', :password => "foobar"
+      put '/User', :password => "foobar"
       last_response.should be_ok
       user = LdapUser.find('User')
       ActiveLdap::UserPassword.valid?("foobar", 

@@ -7,18 +7,18 @@ describe SystemInformationAPI do
     described_class
   end
   
-  describe "GET /system/vmstat" do
+  describe "GET /vmstat" do
     before do
-      get '/system/vmstat'
+      get '/vmstat'
     end
     subject { last_response }
     
     it { should be_ok }
   end
   
-  describe "GET /system/disk/" do
+  describe "GET /disk/" do
     before do
-      get '/system/disk/' 
+      get '/disk/' 
     end
     subject { last_response }
     

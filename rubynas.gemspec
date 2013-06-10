@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'simplecov-rcov-text'
   spec.add_development_dependency 'rack-test'
+  spec.add_development_dependency 'database_cleaner'
 
   # Configuration
   spec.add_runtime_dependency 'inifile'
@@ -42,11 +43,8 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'sqlite3'
   
   # Ldap access layer
+  spec.add_runtime_dependency 'net-ldap'
   spec.add_runtime_dependency 'activeldap', '~> 3.2.2'
-
-  # LDAP Management
-  spec.add_runtime_dependency 'devise'
-  spec.add_runtime_dependency 'devise_ldap_authenticatable'
 
   # AFP / Netatalk
   spec.add_runtime_dependency 'netatalk-config'
@@ -62,7 +60,6 @@ Gem::Specification.new do |spec|
   # System logging
   spec.add_runtime_dependency 'lumberjack'
   spec.add_runtime_dependency 'lumberjack_syslog_device'
-
 
   # System information
   spec.add_runtime_dependency 'vmstat'

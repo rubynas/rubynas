@@ -6,92 +6,92 @@ describe 'Restful Volume API' do
   def app
     VolumeAPI
   end
-  
-  context "GET /volumes" do
+
+  context "GET /" do
     before do
       create :root_volume
-      get '/volumes' 
+      get '/'
     end
     subject { last_response }
-    
+
     it { should be_ok }
     its(:body) { should include('/') }
     its(:body) { should include('System Volume') }
   end
-  
-  context "GET /volumes/:id" do
+
+  context "GET /:id" do
     context "with volume" do
       before do
         create :root_volume
-        get '/volumes/1' 
+        get '/1'
       end
       subject { last_response }
-    
+
       it { should be_ok }
       its(:body) { should include('/') }
       its(:body) { should include('System Volume') }
     end
-    
+
     context "without volume" do
       before do
-        get '/volumes/123123' 
+        get '/123123'
       end
       subject { last_response }
-    
+
       its(:status) { should == 404 }
     end
   end
-  
-  context "PUT /volumes/:id" do
+
+  context "PUT /:id" do
     context "with volume" do
       before do
         create :root_volume
-        put '/volumes/1', name: "Foo"
+        put '/1', name: "Foo"
       end
       subject { last_response }
-    
+
       it { should be_ok }
       specify { Volume.find(1).name.should == "Foo" }
     end
-    
+
     context "without volume" do
       before do
-        put '/volumes/123123', name: "Foo"
+        put '/123123', name: "Foo"
       end
       subject { last_response }
-    
+
       its(:status) { should == 404 }
     end
   end
-  
-  context "POST /volumes/:id" do
+
+  context "POST /:id" do
     before do
-      post '/volumes', name: "Foo", path: "/"
+      post '/', name: "Foo", path: "/"
     end
     subject { last_response }
-  
+
     its(:status) { should == 201 }
     specify { Volume.where(name: "Foo").should have(1).item }
   end
-  
-  context "DELETE /volumes/:id" do
+
+  context "DELETE /:id" do
     context "with volume" do
       before do
         create :root_volume
-        delete '/volumes/1'
+        delete '/1'
       end
       subject { last_response }
-    
+
       it { should be_ok }
       specify { Volume.all.should be_empty }
     end
-    
+
     context "without volume" do
       before do
-        delete '/volumes/123123'
+        delete '/123123'
       end
       subject { last_response }
-    
+
       its(:status) { should == 404 }
     end
   end

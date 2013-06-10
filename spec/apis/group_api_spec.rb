@@ -9,11 +9,11 @@ describe 'Restful Group API' do
   
   before { LdapGroup.all.each(&:destroy) }
   
-  context "GET /groups" do
+  context "GET /" do
     before do
       create :user_ldap_group
       create :admin_ldap_group
-      get '/groups' 
+      get '/' 
     end
     subject { last_response }
     
@@ -22,11 +22,11 @@ describe 'Restful Group API' do
     its(:body) { should include('Administrators') }
   end
   
-  context "GET /groups/:cn" do
+  context "GET /:cn" do
     context "with group" do
       before do
         create :user_ldap_group
-        get '/groups/Users' 
+        get '/Users' 
       end
       subject { last_response }
     
@@ -36,19 +36,19 @@ describe 'Restful Group API' do
     end
 
     context "without user" do
-      before { get '/groups/Users' }
+      before { get '/Users' }
       subject { last_response }
   
       its(:status) { should == 404 }
     end
   end
   
-  context "DELETE /groups" do
+  context "DELETE /" do
     context "with group" do
       before do
         create :user_ldap_group
         LdapGroup.all.should_not be_empty
-        delete '/groups/Users' 
+        delete '/Users' 
       end
       subject { last_response }
     
@@ -57,30 +57,30 @@ describe 'Restful Group API' do
     end
 
     context "without user" do
-      before { delete '/groups/Users' }
+      before { delete '/Users' }
       subject { last_response }
   
       its(:status) { should == 404 }
     end
   end
   
-  context "POST /groups" do
+  context "POST /" do
     it "adds a new group" do
-      post '/groups', common_name: "Foo", gid_number: 1001
+      post '/', common_name: "Foo", gid_number: 1001
       last_response.status.should == 201
     end
     
     it "returns a 400 if params are missing" do
-      post '/groups'
+      post '/'
       last_response.status.should == 400
     end
   end
   
-  context "PUT /groups/:cn" do
+  context "PUT /:cn" do
     context "with user" do
       before do
         create :user_ldap_group
-        put '/groups/Users', common_name: "Foo", gid_number: 1001
+        put '/Users', common_name: "Foo", gid_number: 1001
       end
       subject { LdapGroup.find('Users') }
       
@@ -88,7 +88,7 @@ describe 'Restful Group API' do
     end
     
     context "without user" do
-      before { put '/groups/Users', common_name: "Foo", gid_number: 1001 }
+      before { put '/Users', common_name: "Foo", gid_number: 1001 }
       subject { last_response }
   
       its(:status) { should == 404 }
