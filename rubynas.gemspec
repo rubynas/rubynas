@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{TODO: Write a gem summary}
   spec.homepage      = ""
   spec.license       = "MIT"
+  spec.required_ruby_version = '>= 1.9.0'
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
