@@ -80,6 +80,6 @@ class UserAPI < Grape::API
   desc 'Delete user'
   delete '/:cn' do
     LdapUser.find(params.delete(:cn)).destroy
-    true
+    Rack::Response.new([], 204)
   end
 end
