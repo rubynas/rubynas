@@ -8,9 +8,10 @@ Gem::Specification.new do |spec|
   spec.version       = Rubynas::VERSION
   spec.authors       = ["Vincent Landgraf"]
   spec.email         = ["setcool@gmx.de"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{The ruby based nas system}
+  spec.summary       = "Offers an api to configure, install and manage " + 
+                       "essential services for a nas system"
+  spec.homepage      = "https://github.com/rubynas/rubynas"
   spec.license       = "MIT"
   spec.required_ruby_version = '>= 1.9.0'
 

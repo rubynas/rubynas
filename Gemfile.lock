@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rubynas (0.1.0)
+    rubynas (0.1.0.pre.1)
       activeldap (~> 3.2.2)
       activerecord (= 3.2.13)
       dnssd
