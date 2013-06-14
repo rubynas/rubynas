@@ -13,7 +13,8 @@ require 'active_support/dependencies'
 require 'vmstat'
 
 %w(apis models services installers).each do |dir|
-  ActiveSupport::Dependencies.autoload_paths.unshift("lib/rubynas/#{dir}")
+  path = File.expand_path("../rubynas/#{dir}", __FILE__)
+  ActiveSupport::Dependencies.autoload_paths.unshift(path)
 end
 
 module Rubynas

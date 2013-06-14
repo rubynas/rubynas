@@ -1,21 +1,30 @@
 # rubynas
 
-## Getting Started
+## Install
+
+On Ubuntu do the following:
+
+    # sudo apt-get install ruby1.9.3 libsqlite3-dev libavahi-compat-libdnssd-dev
+    # sudo ruby1.9.3 -S gem install rubynas
+    # rubynas install --admin admin --domain rubynas.com --password secret
+
+The rubynas api will be exposed using the mdns service. Typically its available on https://localhost:5100/api/. Maybe replace `localhost` by the name of your server.
+
+
+## Development
+
+### Getting Started
 
 To start developing simply start foreman:
 
     foreman start
-
-And go to your webbrowser at: 
-
-    http://127.0.0.1:5100/
 
 Login with one of the users in the ldap:
 
     email: admin@rubynas.com or user@rubynas.com
     password: secret
 
-## Run the tests
+### Run the tests
 
 Since the tests depend on the LDAP you have to start it first with:
 
@@ -24,36 +33,17 @@ Since the tests depend on the LDAP you have to start it first with:
 Then use either:
 
     rake spec
-    rake
-    rspec spec
+
 
 ## Directories
 
 This project has a typical rails layout plus:
 
-* **debian** for debian deployment
-* **deploy** containing system configs and foreman tempalte
 * **sandbox** place for local ldap server and the like
 
-## Development & Vagrant
+## Concepts
 
-The vagrant box is setup so that one can test the current application state on the box. To get startet create the box and deploy the application with its services:
-
-    vagrant up
-
-Install build dependencies:
-
-    cap deploy:setup
-
-Install and configure LDAP:
-
-    cap deploy:services
-
-Build and install the service:
-
-    cap deploy:debian
-
-# rubynas Shares
+### Shares
 
 The following section describes how shares "should be/are" implemented in rubynas.
 
@@ -63,7 +53,7 @@ The general idea more or less oriented how mac os x is handling shares with a bi
 
 Basically we can create a share which has a location and users or groups that can access it. Unlike mac os x the user can specify in which way the share is exposed. In other words it should be possible to tell per share if it can be accessed by AFP, SMB etc.
 
-## Share Entity
+### Share Entity
 
 Bases on the idea above we got the following structure:
 
@@ -87,7 +77,7 @@ A Permission is either based on a group or user. The reference to the **ldap use
 * User (LdapUser) the ldap user that is permitted
 * Group (LdapGroup) the ldap user that is permitted
 
-## Interaction
+### Interaction
 
 To actually apply the share configuration to the services there are several layers which control the sharing service (aftp, smb, ...) and it's configuration. Here a quick visualization, of the layers (the api is the initiator):
 
@@ -139,11 +129,11 @@ And here is the template for the configuration above:
     time machine = <%= time_machine(share) %>
     <% end %>
 
-## Magic
+### Magic
 
 The magic behind scenes is basically done by the superclasses. They know how to start the a service and where the configuration files are placed. Main part of that magic is the automatic system and configuration detection. This is described in the section OS.
 
-# Config service (idea)
+### Config service (idea)
 
 The configuration needs administrative access to the system. Because every system has a different way to manage processes and a different way to configure this processes, this part is moved to a different project to keep the core clean from system and os details. This examples illustrates a possible restful interface
 

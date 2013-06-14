@@ -2,18 +2,31 @@
 
 $LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 require 'rubynas'
+require 'rubynas/version'
 
 case ARGV.first
 when 'migrate'
   puts 'Migration of the database'
   path = File.expand_path('../../lib/rubynas/db/migrate', __FILE__)
   ActiveRecord::Migrator.migrate path
+
+  # In the production environment should the root volume always be available
+  unless Volume.find_by_name_and_path("System Volume", "/")
+    Volume.create(name: "System Volume", path: "/")
+  end
+
+  # Setup default account and structure if they don't exist in the repository
+  LdapOrgUnit.find_or_create('users')
+  LdapOrgUnit.find_or_create('groups')
+  LdapUser.find_or_create_admin
+  LdapGroup.find_or_create_administrators
 when 'server'
   require 'rack'
   require 'puma'
   require 'rack/handler/puma'
   require 'dnssd'
   require 'rubynas/version'
+  $0 = 'rubynas'
 
   options = {
     :Host => '0.0.0.0',
@@ -33,4 +46,18 @@ when 'server'
   Rack::Handler::Puma.run(Rubynas::Application, options) do |server|
     [:INT, :TERM].each { |sig| trap(sig) { server.stop } }
   end
+when 'install'
+  if File.exist?('/etc/lsb-release')
+    data = Hash[File.read('/etc/lsb-release').lines.map do |line|
+      line.chomp.split("=")
+    end]
+    klass_name = data['DISTRIB_ID'].capitalize
+    klass_name << data['DISTRIB_CODENAME'].capitalize
+    klass_name << "Installer"
+    Kernel.const_get(klass_name).new('rubynas.com', 'admin', 'secret').run
+  else
+    puts "System unknown! Can't install"
+  end
+else
+  puts "usage: #{$0} <migrate|server|install>"
 end

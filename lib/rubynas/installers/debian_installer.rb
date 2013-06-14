@@ -1,17 +1,29 @@
+require 'etc'
+require 'tempfile'
+require 'fileutils'
+
 class DebianInstaller < BaseInstaller
+  include FileUtils
+
   def prepare_install
     log "Updating the package repository"
-    unless sudo_system('apt-get update')
+    unless system('apt-get update')
       raise InstallError, "Failed to update the package repository"
     end
   end
 
   def install(*packages)
     log "Installing #{packages.join(', ')}"
-    cmd = "#{sudo} DEBIAN_FRONTEND=noninteractive apt-get install -y " +
-          "#{packages.join(' ')}"
-    unless sudo_system(cmd)
+    ENV['DEBIAN_FRONTEND'] = 'noninteractive'
+    unless system("apt-get install -y #{packages.join(' ')}")
       raise PackageError, "Failed to install packages #{packages.join(", ")}"
+    end
+  end
+
+  def restart_service(service)
+    log "Start service rubynas"
+    unless system('service rubynas restart')
+      raise InstallError, "Failed to start service"
     end
   end
 
@@ -25,13 +37,18 @@ class DebianInstaller < BaseInstaller
       value = value.join(', ')
     end
 
-    IO.popen("#{sudo} debconf-set-selections", 'w') do |io|
+    IO.popen("debconf-set-selections", 'w') do |io|
       io.write "'#{category}' '#{key}' #{type} '#{value}'"
     end
     log "Configuring #{category} - #{key}"
     unless $?.exited?
       raise ConfigurationError, "Failed to configure #{category} (#{key})"
     end
+  end
+
+  # Returns the ruby executable
+  def ruby
+    "ruby1.9.3 -S"
   end
 
   def configure_ldap
@@ -78,26 +95,105 @@ class DebianInstaller < BaseInstaller
     install 'libnss-ldapd', 'libpam-ldapd', 'nslcd'
   end
 
-  def configure_app
-    # In the production environment should the root volume always be available
-    unless Volume.find_by_name_and_path("System Volume", "/")
-      Volume.create(name: "System Volume", path: "/")
-    end
-
-    # Setup default account and structure if they don't exist in the repository
-    LdapOrgUnit.find_or_create('users')
-    LdapOrgUnit.find_or_create('groups')
-    LdapUser.find_or_create_admin
-    LdapGroup.find_or_create_administrators
+  def install_app
+    create_rubynas_user
+    create_directories
+    create_configuration
+    create_upstart_script
+    migrate_database
+    restart_service :rubynas
   end
 
-  def install_app
-    # ruby1.9.1-dev nodejs git-buildpackage git-core ruby-bundler openssl
-    # build-essential libreadline6 curl libreadline6-dev git-core zlib1g
-    # zlib1g-dev libssl-dev libyaml-dev sqlite3 libxml2-dev autoconf
-    # libxslt-dev libc6-dev ncurses-dev automake libtool bison subversion
-    # pkg-config libdb-dev libsasl2-dev libxslt-dev libgdbm-dev ncurses-dev
-    # libffi-dev ruby1.8-full libqtwebkit-dev debhelper
-    install 'ruby1.9.3', 'ruby-bundler', 'libsqlite3-dev'
+private
+
+  def create_rubynas_user
+    begin
+      Etc.getpwnam('rubynas')
+    rescue ArgumentError => ex
+      log "Create rubynas user"
+      system 'useradd rubynas --system --no-create-home'
+    end
+  end
+
+  def create_directories
+    log "Create directories"
+    mkdir_p '/var/lib/rubynas/'
+  end
+
+  def create_configuration
+    if File.exist? '/etc/rubynas.ini'
+      log "The configuration rubynas.ini already exist!"
+    else
+      log "Create rubynas.ini"
+      File.open('/etc/rubynas.ini', 'w') do |f|
+        config = <<-CONF
+          ;
+          ; This is the configuration file for local development and testing.
+          ;
+
+          ; Configuration for the sqlite3 database
+          [Database]
+          path = %s
+          timeout = 5000
+          pool = 5
+
+          ; Configuration for the ldap server that is used for authentication,
+          ; user and group management
+          [Ldap]
+          host = 127.0.0.1
+          port = 389
+          base = "%s"
+          bind_dn = "%s"
+          password = %s
+
+          ; Server related configuration
+          [Server]
+          ; if syslog set to false it will be logged to stdout
+          syslog = true
+          ; NOTHING HERE YET
+        CONF
+        f.puts config.gsub(/^\s+/, "") % [
+          db_path,
+          ldap_base,
+          admin_ldap_dn,
+          password
+        ]
+      end
+    end
+  end
+
+  def create_upstart_script
+    # Create a rubynas upstart script
+    Tempfile.open('env') do |fe|
+      %w(GEM_HOME GEM_PATH PATH).each do |name|
+        fe.puts "#{name}=#{ENV[name]}" if ENV[name]
+      end
+      fe.flush
+
+      Tempfile.open('Procfile') do |fp|
+        fp.puts "api: exec #{ruby} #{rubynas} server"
+        fp.close
+
+        Foreman::CLI.start [
+          'export', '--app', 'rubynas', '--env', fe.path,
+          '--procfile', fp.path, 'upstart', '/etc/init'
+        ]
+      end
+    end
+  end
+
+  def migrate_database
+    log "Migrate the database"
+    unless system("#{ruby} #{rubynas} migrate")
+      raise InstallError, "Failed to migrate the database"
+    end
+
+    log "Allow access to database by rubynas user"
+    user = Etc.getpwnam('rubynas')
+    chown user.uid, user.gid, db_path
+  end
+
+  def db_path
+    '/var/lib/rubynas/sqlite3.db'
   end
 end

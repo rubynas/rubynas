@@ -54,7 +54,10 @@ module Rubynas
 end
 
 # Regular usage
-Rubynas::Config.use('/etc/rubynas.ini') if File.exist?('/etc/rubynas.ini')
+if File.exist?('/etc/rubynas.ini')
+  Rubynas::Config.use('/etc/rubynas.ini')
 
 # Local testing usage
-Rubynas::Config.use('rubynas.ini') if File.exist?('rubynas.ini')
+elsif File.exist?('rubynas.ini')
+  Rubynas::Config.use('rubynas.ini')
+end
