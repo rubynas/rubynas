@@ -5,8 +5,12 @@
 On Ubuntu do the following:
 
     # sudo apt-get install ruby1.9.3 libsqlite3-dev libavahi-compat-libdnssd-dev
-    # sudo ruby1.9.3 -S gem install rubynas
-    # rubynas install --admin admin --domain rubynas.com --password secret
+    # sudo ruby1.9.3 -S gem install rubynas --no-ri --no-rdoc44
+    # sudo rubynas install
+
+Currently not implemented but in the future the user can supply these options:
+  
+    # sudo rubynas install --admin admin --domain rubynas.com --password secret
 
 The rubynas api will be exposed using the mdns service. Typically its available on https://localhost:5100/api/. Maybe replace `localhost` by the name of your server.
 

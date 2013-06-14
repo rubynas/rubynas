@@ -1,0 +1,2 @@
+class UbuntuQuantalInstaller < UbuntuInstaller
+end
