@@ -60,4 +60,6 @@ if File.exist?('/etc/rubynas.ini')
 # Local testing usage
 elsif File.exist?('rubynas.ini')
   Rubynas::Config.use('rubynas.ini')
+else
+  Rubynas.logger = Logger.new(STDOUT)
 end
