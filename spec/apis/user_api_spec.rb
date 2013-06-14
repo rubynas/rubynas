@@ -4,7 +4,7 @@ describe 'Restful User API' do
   include Rack::Test::Methods
 
   def app
-    UserAPI
+    UserApi
   end
   
   before { LdapUser.all.each(&:destroy) }

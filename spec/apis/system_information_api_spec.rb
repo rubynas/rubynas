@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SystemInformationAPI do
+describe SystemInformationApi do
   include Rack::Test::Methods
 
   def app

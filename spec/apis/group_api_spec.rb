@@ -4,7 +4,7 @@ describe 'Restful Group API' do
   include Rack::Test::Methods
 
   def app
-    GroupAPI
+    GroupApi
   end
   
   before { LdapGroup.all.each(&:destroy) }

@@ -1,4 +1,4 @@
-class UserAPI < Grape::API
+class UserApi < Grape::API
   format :json
 
   rescue_from ActiveLdap::EntryNotFound do |error|
@@ -23,14 +23,14 @@ class UserAPI < Grape::API
   end
 
   desc 'Returns the list of users in the ldap', {
-    :object_fields => UserAPI::User.documentation
+    :object_fields => UserApi::User.documentation
   }
   get '/' do
-    present LdapUser.all, with: UserAPI::User
+    present LdapUser.all, with: UserApi::User
   end
 
   desc 'Returns a template for new users', {
-    :object_fields => UserAPI::User.documentation
+    :object_fields => UserApi::User.documentation
   }
   get '/template' do
     next_uid_number = LdapUser.all.map(&:uid_number).max.to_i + 1
@@ -60,10 +60,10 @@ class UserAPI < Grape::API
   end
 
   desc 'Request single user', {
-    :object_fields => UserAPI::User.documentation
+    :object_fields => UserApi::User.documentation
   }
   get '/:cn' do
-    present LdapUser.find(params[:cn]), with: UserAPI::User
+    present LdapUser.find(params[:cn]), with: UserApi::User
   end
 
   desc 'Update the user data in the ldap'

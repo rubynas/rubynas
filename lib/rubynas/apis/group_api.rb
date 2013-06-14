@@ -1,4 +1,4 @@
-class GroupAPI < Grape::API
+class GroupApi < Grape::API
   format :json
 
   rescue_from ActiveLdap::EntryNotFound do |e|
@@ -12,15 +12,15 @@ class GroupAPI < Grape::API
   end
 
   desc 'Returns the list of groups in the ldap', {
-    :object_fields => GroupAPI::Group.documentation
+    :object_fields => GroupApi::Group.documentation
   }
   get '/' do
-    present LdapGroup.all, with: GroupAPI::Group
+    present LdapGroup.all, with: GroupApi::Group
   end
 
   desc 'Return a single group'
   get '/:cn' do
-    present LdapGroup.find(params[:cn]), with: GroupAPI::Group
+    present LdapGroup.find(params[:cn]), with: GroupApi::Group
   end
 
   desc 'Delete the passed group'

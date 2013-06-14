@@ -1,4 +1,4 @@
-class VolumeAPI < Grape::API
+class VolumeApi < Grape::API
   format :json
 
   rescue_from ActiveRecord::RecordNotFound do |e|
@@ -14,20 +14,20 @@ class VolumeAPI < Grape::API
   end
 
   desc 'Returns the list of volumes', {
-    :object_fields => ::VolumeAPI::Volume.documentation
+    :object_fields => ::VolumeApi::Volume.documentation
   }
   get '/' do
-    present ::Volume.all, with: ::VolumeAPI::Volume
+    present ::Volume.all, with: ::VolumeApi::Volume
   end
 
   desc 'Return the requested volume', {
-    :object_fields => ::VolumeAPI::Volume.documentation
+    :object_fields => ::VolumeApi::Volume.documentation
   }
   params do
     requires :id, type: Fixnum
   end
   get '/:id' do
-    present ::Volume.find(params[:id]), with: ::VolumeAPI::Volume
+    present ::Volume.find(params[:id]), with: ::VolumeApi::Volume
   end
 
   desc 'Update the volume with the passed id'
@@ -37,7 +37,7 @@ class VolumeAPI < Grape::API
   end
 
   desc 'Create new volume', {
-    :object_fields => ::VolumeAPI::Volume.documentation
+    :object_fields => ::VolumeApi::Volume.documentation
   }
   post '/' do
     ::Volume.create name: params[:name], path: params[:path]

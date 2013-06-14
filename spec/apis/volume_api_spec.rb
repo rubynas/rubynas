@@ -4,7 +4,7 @@ describe 'Restful Volume API' do
   include Rack::Test::Methods
 
   def app
-    VolumeAPI
+    VolumeApi
   end
 
   context "GET /" do

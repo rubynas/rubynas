@@ -1,4 +1,4 @@
-class SystemInformationAPI < Grape::API
+class SystemInformationApi < Grape::API
   format :json
 
   desc 'resturns vmstat data'

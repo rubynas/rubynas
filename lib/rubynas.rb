@@ -23,10 +23,10 @@ module Rubynas
 
   Application = Rack::Builder.new do
     map "/api" do
-      map("/users")   { run ::UserAPI }
-      map("/groups")  { run ::GroupAPI }
-      map("/volumes") { run ::VolumeAPI }
-      map("/system")  { run ::SystemInformationAPI }
+      map("/users")   { run ::UserApi }
+      map("/groups")  { run ::GroupApi }
+      map("/volumes") { run ::VolumeApi }
+      map("/system")  { run ::SystemInformationApi }
     end
   end
 end
