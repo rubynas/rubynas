@@ -55,8 +55,8 @@ class UserApi < Grape::API
   end
   post '/' do
     password = ActiveLdap::UserPassword.sha(params.delete(:password))
-    LdapUser.create(params.merge(:userPassword => password))
-    true
+    user = LdapUser.create(params.merge(:userPassword => password))
+    present user, with: UserAPI::User
   end
 
   desc 'Request single user', {
@@ -74,11 +74,12 @@ class UserApi < Grape::API
       params.merge!(:userPassword => password)
     end
     user.update_attributes(params)
+    present user, with: UserAPI::User
   end
 
   desc 'Delete user'
   delete '/:cn' do
     LdapUser.find(params.delete(:cn)).destroy
-    true
+    Rack::Response.new([], 204)
   end
 end
