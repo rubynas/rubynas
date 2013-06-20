@@ -56,7 +56,7 @@ class UserApi < Grape::API
   post '/' do
     password = ActiveLdap::UserPassword.sha(params.delete(:password))
     user = LdapUser.create(params.merge(:userPassword => password))
-    present user, with: UserAPI::User
+    present user, with: UserApi::User
   end
 
   desc 'Request single user', {
@@ -74,7 +74,7 @@ class UserApi < Grape::API
       params.merge!(:userPassword => password)
     end
     user.update_attributes(params)
-    present user, with: UserAPI::User
+    present user, with: UserApi::User
   end
 
   desc 'Delete user'

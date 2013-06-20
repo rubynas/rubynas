@@ -5,7 +5,7 @@ shared_examples 'aptget-install' do |method|
     subject.should_receive(:system).and_return(true)
     subject.send(method)
   end
-  
+
   it 'can fail' do
     subject.should_receive(:system).and_return(false)
     expect { subject.send(method) }.to(
@@ -18,7 +18,7 @@ shared_examples 'aptget-configure' do |method|
     IO.stub(:popen)
     subject.send(method)
   end
-  
+
   it 'can fail' do
     IO.stub(:popen)
     $?.stub(:exited?) { false }
@@ -29,30 +29,30 @@ end
 
 describe DebianInstaller do
   subject { described_class.new('rubynas.com', 'admin', 'secret') }
-  
+
   context '#prepare_install' do
     it_behaves_like 'aptget-install', :prepare_install
   end
-  
+
   context '#install' do
     it 'should work' do
       subject.should_receive(:system).and_return(true)
       subject.install
     end
-    
+
     it 'can fail' do
       subject.should_receive(:system).and_return(false)
       expect { subject.install }.to(
         raise_error(BaseInstaller::PackageError))
     end
   end
-  
+
   context '#debconf' do
     it 'should work' do
       IO.stub(:popen)
       subject.debconf('ldap', 'password', :password, 'secret')
     end
-    
+
     it 'can fail' do
       IO.stub(:popen)
       $?.stub(:exited?) { false }
@@ -60,27 +60,32 @@ describe DebianInstaller do
         raise_error(BaseInstaller::ConfigurationError))
     end
   end
-  
+
   context '#configure_ldap' do
     it_behaves_like 'aptget-configure', :configure_ldap
   end
-  
+
   context '#install_ldap' do
     it_behaves_like 'aptget-install', :install_ldap
   end
-  
+
   context '#configure_pam_auth' do
     it_behaves_like 'aptget-configure', :configure_pam_auth
   end
-  
+
   context '#install_pam_auth' do
     it_behaves_like 'aptget-install', :install_pam_auth
   end
-  
-  pending '#configure_app' do
-  end
-  
+
   context '#install_app' do
-    it_behaves_like 'aptget-install', :install_app
+    it 'install the application' do
+      subject.should_receive(:create_rubynas_user)
+      subject.should_receive(:create_directories)
+      subject.should_receive(:create_configuration)
+      subject.should_receive(:create_upstart_script)
+      subject.should_receive(:migrate_database)
+      subject.should_receive(:restart_service).with(:rubynas)
+      subject.install_app
+    end
   end
 end

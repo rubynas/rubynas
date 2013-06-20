@@ -125,7 +125,7 @@ private
       log "The configuration rubynas.ini already exist!"
     else
       log "Create rubynas.ini"
-      File.open('/etc/rubynas.ini', 'w') do |f|
+      File.open(config_path, 'w') do |f|
         config = <<-CONF
           ;
           ; This is the configuration file for local development and testing.
@@ -191,6 +191,10 @@ private
     log "Allow access to database by rubynas user"
     user = Etc.getpwnam('rubynas')
     chown user.uid, user.gid, db_path
+  end
+  
+  def config_path
+    '/etc/rubynas.ini'
   end
 
   def db_path

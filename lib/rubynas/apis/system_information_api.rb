@@ -10,4 +10,9 @@ class SystemInformationApi < Grape::API
   get '/disk' do
     present Vmstat.disk('/' + params[:path].to_s)
   end
+
+  desc 'returns the hostname'
+  get '/hostname' do
+    present Socket.gethostname
+  end
 end

@@ -6,22 +6,25 @@ describe SystemInformationApi do
   def app
     described_class
   end
-  
+
   describe "GET /vmstat" do
-    before do
-      get '/vmstat'
-    end
+    before { get '/vmstat' }
     subject { last_response }
-    
+
     it { should be_ok }
   end
-  
+
   describe "GET /disk/" do
-    before do
-      get '/disk/' 
-    end
+    before { get '/disk/' }
     subject { last_response }
-    
+
+    it { should be_ok }
+  end
+
+  describe "GET /hostname" do
+    before { get '/hostname' }
+    subject { last_response }
+
     it { should be_ok }
   end
 end

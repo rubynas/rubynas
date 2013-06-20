@@ -12,24 +12,12 @@ describe BaseInstaller do
   its(:admin_ldap_dn) { should == 'cn=admin,dc=rubynas,dc=com' }
   
   context 'non root' do  
-    its(:sudo) { should == 'sudo' }
     its(:root?) { should be_false }
-    
-    specify do
-      subject.should_receive(:system).with("sudo date")
-      subject.sudo_system('date')
-    end
   end
   
   context 'root' do
     before { Process.stub(:uid) { 0 } } 
 
-    its(:sudo) { should be_nil }
     its(:root?) { should be_true }
-    
-    specify do
-      subject.should_receive(:system).with("date")
-      subject.sudo_system('date')
-    end
   end
 end
