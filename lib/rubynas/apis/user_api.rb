@@ -1,11 +1,8 @@
 class UserApi < Grape::API
   format :json
 
-  rescue_from ActiveLdap::EntryNotFound do |error|
-    Rack::Response.new({
-      'status'  => 404,
-      'message' => error.message
-    }.to_json, 404)
+  rescue_from ActiveLdap::EntryNotFound do |e|
+    Rack::Response.new([e.inspect], 404)
   end
 
   class User < Grape::Entity
